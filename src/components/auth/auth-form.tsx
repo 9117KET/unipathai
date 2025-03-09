@@ -40,18 +40,23 @@ interface LoginFormProps {
   type: "login";
   onSubmit: (values: LoginFormValues) => Promise<void>;
   className?: string;
+  isLoading?: boolean;
 }
 
 interface RegisterFormProps {
   type: "register";
   onSubmit: (values: RegisterFormValues) => Promise<void>;
   className?: string;
+  isLoading?: boolean;
 }
 
 type AuthFormProps = LoginFormProps | RegisterFormProps;
 
 export function AuthForm(props: AuthFormProps) {
-  const [isLoading, setIsLoading] = useState(false);
+  const externalLoading = "isLoading" in props ? props.isLoading : undefined;
+  const [internalLoading, setInternalLoading] = useState(false);
+  const isLoading =
+    externalLoading !== undefined ? externalLoading : internalLoading;
   const [showPassword, setShowPassword] = useState(false);
 
   const isLogin = props.type === "login";
@@ -67,7 +72,7 @@ export function AuthForm(props: AuthFormProps) {
     });
 
     const handleFormSubmit = async (data: LoginFormValues) => {
-      setIsLoading(true);
+      setInternalLoading(true);
       try {
         if (isLogin && "type" in props && props.type === "login") {
           await props.onSubmit(data);
@@ -75,7 +80,7 @@ export function AuthForm(props: AuthFormProps) {
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        setInternalLoading(false);
       }
     };
 
@@ -176,7 +181,7 @@ export function AuthForm(props: AuthFormProps) {
     });
 
     const handleFormSubmit = async (data: RegisterFormValues) => {
-      setIsLoading(true);
+      setInternalLoading(true);
       try {
         if (!isLogin && "type" in props && props.type === "register") {
           await props.onSubmit(data);
@@ -184,7 +189,7 @@ export function AuthForm(props: AuthFormProps) {
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        setInternalLoading(false);
       }
     };
 

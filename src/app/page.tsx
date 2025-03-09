@@ -14,451 +14,308 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FeatureCard } from "@/components/feature-card";
+import { DemoGradientCards } from "@/components/demo-gradient-cards";
+import { GradientBackground } from "@/components/ui/gradient-background";
+import { FeatureCards } from "@/components/feature-cards";
+import { GradientCard } from "@/components/ui/gradient-card";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-white to-indigo-50/50 py-20 sm:py-32">
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute left-[40%] top-0 h-[500px] w-[500px] rounded-full bg-indigo-100/20 blur-3xl"></div>
-            <div className="absolute -bottom-40 -left-20 h-[300px] w-[300px] rounded-full bg-rose-100/20 blur-3xl"></div>
-          </div>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-12 lg:items-center">
-              <div>
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Your AI-Powered
-                  <span className="block text-indigo-600">College Journey</span>
-                  Starts Here
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Navigate your college application process with confidence
-                  using our AI-powered platform. Get personalized essay
-                  feedback, smart college matches, and comprehensive application
-                  tracking.
-                </p>
-                <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  <Link href="/register">
-                    <Button
-                      size="lg"
-                      className="w-full sm:w-auto shadow-lg shadow-indigo-100 group"
-                    >
-                      Start Free Trial
-                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                  <Link href="/features">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="w-full sm:w-auto"
-                    >
-                      Explore Features
-                    </Button>
-                  </Link>
-                </div>
-                <div className="mt-4">
-                  <Link
-                    href="/pricing"
-                    className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
-                  >
-                    View pricing plans →
-                  </Link>
-                </div>
-                <div className="mt-10 flex items-center gap-x-6">
-                  <div className="flex -space-x-2">
-                    {[...Array(5)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-                        style={{
-                          backgroundImage: `url(https://source.unsplash.com/random/100x100?face&${i})`,
-                          backgroundSize: "cover",
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <div className="text-sm leading-6 text-gray-600">
-                    <strong className="font-semibold text-gray-900">
-                      5,000+
-                    </strong>{" "}
-                    students trust UniPathAI
+        {/* Hero Section with new gradient style */}
+        <section className="relative py-20 sm:py-32">
+          <GradientBackground
+            accentPositions={{
+              accent1: { top: "5%", left: "30%" },
+              accent2: { bottom: "10%", right: "10%" },
+              accent3: { top: "50%", left: "5%" },
+            }}
+          >
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-20">
+                <div>
+                  <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                    <span className="block">Navigate Your</span>
+                    <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      College Journey
+                    </span>
+                  </h1>
+                  <p className="mt-6 max-w-lg text-lg leading-8 opacity-90">
+                    AI-powered assistance for college applications, essays, and
+                    finding your perfect college match.
+                  </p>
+                  <div className="mt-10 flex flex-col sm:flex-row gap-4">
+                    <Link href="/register">
+                      <Button
+                        size="lg"
+                        className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 w-full sm:w-auto"
+                      >
+                        Get Started Free
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                    <Link href="/features">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="border-indigo-400/30 text-indigo-400 hover:bg-indigo-950/30 w-full sm:w-auto"
+                      >
+                        Explore Features
+                      </Button>
+                    </Link>
                   </div>
                 </div>
-              </div>
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-72 w-72 rounded-full bg-indigo-200/50 blur-3xl"></div>
-                </div>
-                <div className="relative rounded-2xl bg-white/90 backdrop-blur-sm shadow-xl border border-indigo-100 p-7">
-                  <div className="absolute -top-3 -right-3 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                    AI-Powered
-                  </div>
-                  <div className="space-y-7">
-                    <div className="flex items-center gap-4 rounded-lg bg-gradient-to-r from-indigo-50 to-purple-50 p-5 transition-transform hover:scale-105">
-                      <Sparkles className="h-9 w-9 text-indigo-600" />
-                      <div>
-                        <h3 className="font-semibold text-lg text-indigo-900">
-                          AI Essay Assistant
-                        </h3>
-                        <p className="text-sm text-indigo-600/80">
-                          Get real-time feedback on your essays
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 p-5 transition-transform hover:scale-105">
-                      <Target className="h-9 w-9 text-emerald-600" />
-                      <div>
-                        <h3 className="font-semibold text-lg text-emerald-900">
-                          Smart College Matching
-                        </h3>
-                        <p className="text-sm text-emerald-600/80">
-                          Find your perfect college fit
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4 rounded-lg bg-gradient-to-r from-rose-50 to-pink-50 p-5 transition-transform hover:scale-105">
-                      <Clock className="h-9 w-9 text-rose-600" />
-                      <div>
-                        <h3 className="font-semibold text-lg text-rose-900">
-                          Application Tracking
-                        </h3>
-                        <p className="text-sm text-rose-600/80">
-                          Stay organized and never miss deadlines
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+
+                {/* New feature cards that match the image */}
+                <div className="relative">
+                  <FeatureCards />
                 </div>
               </div>
             </div>
-          </div>
+          </GradientBackground>
+        </section>
+
+        {/* Feature Cards Section */}
+        <section className="py-16">
+          <GradientBackground
+            accentPositions={{
+              accent1: { top: "30%", right: "20%" },
+              accent2: { bottom: "20%", left: "15%" },
+              accent3: { top: "60%", right: "10%" },
+            }}
+          >
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-3xl mx-auto mb-10">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  Explore Our Features
+                </h2>
+                <p className="mt-4 text-lg opacity-80">
+                  Discover how UniPathAI makes your college application journey
+                  smoother and more successful.
+                </p>
+              </div>
+
+              <DemoGradientCards />
+            </div>
+          </GradientBackground>
         </section>
 
         {/* Stats Section */}
-        <section className="bg-white py-12 sm:py-16">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
-              <div className="mx-auto flex max-w-xs flex-col gap-y-2">
-                <dd className="text-4xl font-semibold tracking-tight text-indigo-600">
-                  5,000+
-                </dd>
-                <dt className="text-base leading-7 text-gray-600">
-                  Happy Students
-                </dt>
-              </div>
-              <div className="mx-auto flex max-w-xs flex-col gap-y-2">
-                <dd className="text-4xl font-semibold tracking-tight text-indigo-600">
-                  95%
-                </dd>
-                <dt className="text-base leading-7 text-gray-600">
-                  College Acceptance Rate
-                </dt>
-              </div>
-              <div className="mx-auto flex max-w-xs flex-col gap-y-2">
-                <dd className="text-4xl font-semibold tracking-tight text-indigo-600">
-                  500+
-                </dd>
-                <dt className="text-base leading-7 text-gray-600">
-                  Universities Covered
-                </dt>
-              </div>
-              <div className="mx-auto flex max-w-xs flex-col gap-y-2">
-                <dd className="text-4xl font-semibold tracking-tight text-indigo-600">
-                  24/7
-                </dd>
-                <dt className="text-base leading-7 text-gray-600">
-                  AI Support
-                </dt>
+        <section className="py-12 sm:py-16">
+          <GradientBackground showAccents={false}>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 gap-y-8 text-center sm:grid-cols-2 sm:gap-12 lg:grid-cols-4">
+                <div>
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-500/10">
+                    <Users className="h-10 w-10 text-indigo-400" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold">5,000+</h3>
+                  <p className="mt-2 text-base opacity-70">Active students</p>
+                </div>
+                <div>
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-purple-500/10">
+                    <GraduationCap className="h-10 w-10 text-purple-400" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold">500+</h3>
+                  <p className="mt-2 text-base opacity-70">College partners</p>
+                </div>
+                <div>
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-pink-500/10">
+                    <CheckCircle className="h-10 w-10 text-pink-400" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold">92%</h3>
+                  <p className="mt-2 text-base opacity-70">Acceptance rate</p>
+                </div>
+                <div>
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-500/10">
+                    <Shield className="h-10 w-10 text-indigo-400" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold">100%</h3>
+                  <p className="mt-2 text-base opacity-70">Secure & private</p>
+                </div>
               </div>
             </div>
-          </div>
+          </GradientBackground>
         </section>
 
-        {/* Features Section */}
-        <section className="bg-gradient-to-b from-indigo-50/50 to-white py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Everything You Need for College Applications
-              </h2>
-              <p className="mt-4 text-lg text-gray-600">
-                Our AI-powered platform streamlines every aspect of your college
-                application journey.
-              </p>
-            </div>
-
-            <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              <FeatureCard
-                icon={Sparkles}
-                title="AI Essay Review"
-                description="Get instant, intelligent feedback on your essays from our AI writing assistant."
-                gradient="indigo"
-              />
-
-              <FeatureCard
-                icon={Target}
-                title="College Matching"
-                description="Discover colleges that match your academic profile, interests, and preferences."
-                gradient="emerald"
-              />
-
-              <FeatureCard
-                icon={Clock}
-                title="Application Tracking"
-                description="Keep track of all your applications, deadlines, and requirements in one place."
-                gradient="rose"
-              />
-
-              <FeatureCard
-                icon={CheckCircle}
-                title="Requirement Checklist"
-                description="Ensure you meet all application requirements with our intelligent checklist system."
-                gradient="amber"
-              />
-
-              <FeatureCard
-                icon={Users}
-                title="Community Support"
-                description="Connect with other students and get advice from those who've been accepted."
-                gradient="purple"
-              />
-
-              <FeatureCard
-                icon={Settings}
-                title="Personalized Dashboard"
-                description="Your custom dashboard gives you a bird's-eye view of your entire application process."
-                gradient="indigo"
-              />
-            </div>
-            <div className="mt-10 text-center">
-              <Link href="/features">
-                <Button variant="outline" size="lg" className="group">
-                  View All Features
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works Section */}
-        <section className="bg-white py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                How UniPathAI Works
-              </h2>
-              <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-                Our platform makes the college application process simple,
-                organized, and stress-free.
-              </p>
-            </div>
-
-            <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-              <div className="relative flex flex-col items-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                  <span className="text-xl font-bold">1</span>
-                </div>
-                <h3 className="mt-4 text-xl font-semibold text-gray-900">
-                  Create Your Profile
-                </h3>
-                <p className="mt-2 text-center text-gray-600">
-                  Answer a few questions about your academic background,
-                  interests, and college preferences.
-                </p>
-                <div className="hidden md:block absolute top-7 left-full w-full max-w-[80px] h-0.5 bg-indigo-200">
-                  <div className="absolute -right-1.5 -top-1.5 h-3 w-3 rounded-full bg-indigo-600"></div>
-                </div>
-              </div>
-
-              <div className="relative flex flex-col items-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                  <span className="text-xl font-bold">2</span>
-                </div>
-                <h3 className="mt-4 text-xl font-semibold text-gray-900">
-                  Get Matched
-                </h3>
-                <p className="mt-2 text-center text-gray-600">
-                  Our AI analyzes your profile and recommends colleges that fit
-                  your unique attributes and goals.
-                </p>
-                <div className="hidden md:block absolute top-7 left-full w-full max-w-[80px] h-0.5 bg-indigo-200">
-                  <div className="absolute -right-1.5 -top-1.5 h-3 w-3 rounded-full bg-indigo-600"></div>
-                </div>
-              </div>
-
-              <div className="relative flex flex-col items-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-                  <span className="text-xl font-bold">3</span>
-                </div>
-                <h3 className="mt-4 text-xl font-semibold text-gray-900">
-                  Apply with Confidence
-                </h3>
-                <p className="mt-2 text-center text-gray-600">
-                  Use our tools to craft perfect essays, track applications, and
-                  meet every deadline.
+        {/* Process Section */}
+        <section className="py-16 sm:py-24">
+          <GradientBackground
+            accentPositions={{
+              accent1: { top: "20%", right: "30%" },
+              accent2: { bottom: "30%", left: "25%" },
+            }}
+          >
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-3xl mx-auto mb-16">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  How It Works
+                </h2>
+                <p className="mt-4 text-lg opacity-80">
+                  Our simple process helps you navigate every step of your
+                  college application journey.
                 </p>
               </div>
+
+              <div className="flex flex-col space-y-16 md:flex-row md:space-y-0 md:space-x-8">
+                <div className="relative flex flex-col items-center md:flex-1">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400">
+                    <span className="text-xl font-bold">1</span>
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold">
+                    Create Your Profile
+                  </h3>
+                  <p className="mt-2 text-center opacity-70">
+                    Sign up and build your academic profile with your interests,
+                    achievements, and goals.
+                  </p>
+                </div>
+
+                <div className="relative flex flex-col items-center md:flex-1">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-purple-500/10 text-purple-400">
+                    <span className="text-xl font-bold">2</span>
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold">Get Matched</h3>
+                  <p className="mt-2 text-center opacity-70">
+                    Our AI matches you with colleges that align with your
+                    academic profile and preferences.
+                  </p>
+                </div>
+
+                <div className="relative flex flex-col items-center md:flex-1">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-pink-500/10 text-pink-400">
+                    <span className="text-xl font-bold">3</span>
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold">
+                    Apply with Confidence
+                  </h3>
+                  <p className="mt-2 text-center opacity-70">
+                    Use our tools to craft perfect essays, track applications,
+                    and meet every deadline.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </GradientBackground>
         </section>
 
         {/* Testimonials */}
-        <section className="bg-gradient-to-b from-white to-indigo-50/50 py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                What Our Students Say
-              </h2>
-              <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-                Thousands of students have used UniPathAI to get into their
-                dream colleges.
-              </p>
-            </div>
-
-            <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Testimonial 1 */}
-              <div className="rounded-2xl bg-white p-8 shadow-lg shadow-indigo-100 border border-indigo-50">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="h-12 w-12 rounded-full bg-cover bg-center"
-                    style={{
-                      backgroundImage:
-                        "url(https://source.unsplash.com/random/100x100?face&1)",
-                    }}
-                  ></div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Emma Thompson
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      Accepted to Stanford
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-4 text-gray-600">
-                  &quot;UniPathAI&apos;s essay feedback was a game-changer. The
-                  AI caught things my teachers missed, and I&apos;m convinced it
-                  helped me get into my dream school.&quot;
+        <section className="py-20">
+          <GradientBackground showAccents={false}>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-3xl mx-auto mb-16">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  What Our Users Say
+                </h2>
+                <p className="mt-4 text-lg opacity-80">
+                  Hear from students who transformed their college application
+                  journey with UniPathAI.
                 </p>
               </div>
 
-              {/* Testimonial 2 */}
-              <div className="rounded-2xl bg-white p-8 shadow-lg shadow-indigo-100 border border-indigo-50">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="h-12 w-12 rounded-full bg-cover bg-center"
-                    style={{
-                      backgroundImage:
-                        "url(https://source.unsplash.com/random/100x100?face&2)",
-                    }}
-                  ></div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Michael Chen
-                    </h3>
-                    <p className="text-sm text-gray-600">Accepted to MIT</p>
+              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <GradientCard className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="h-12 w-12 rounded-full bg-indigo-500/10">
+                      {/* User avatar could go here */}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Alex Thompson</h4>
+                      <p className="text-sm opacity-70">
+                        Harvard University '25
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <p className="mt-4 text-gray-600">
-                  &quot;The college matching feature suggested schools I
-                  hadn&apos;t considered that ended up being perfect fits.
-                  I&apos;m now at my dream engineering program!&quot;
-                </p>
-              </div>
+                  <p className="italic opacity-80">
+                    "The AI essay feedback was incredibly helpful. It helped me
+                    refine my personal statement and got me accepted to my dream
+                    school!"
+                  </p>
+                </GradientCard>
 
-              {/* Testimonial 3 */}
-              <div className="rounded-2xl bg-white p-8 shadow-lg shadow-indigo-100 border border-indigo-50">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="h-12 w-12 rounded-full bg-cover bg-center"
-                    style={{
-                      backgroundImage:
-                        "url(https://source.unsplash.com/random/100x100?face&3)",
-                    }}
-                  ></div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Sophia Rodriguez
-                    </h3>
-                    <p className="text-sm text-gray-600">Accepted to Yale</p>
+                <GradientCard className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="h-12 w-12 rounded-full bg-purple-500/10">
+                      {/* User avatar could go here */}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Maya Patel</h4>
+                      <p className="text-sm opacity-70">
+                        Stanford University '24
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <p className="mt-4 text-gray-600">
-                  &quot;With 10 applications to manage, I was overwhelmed until
-                  I found UniPathAI. The tracking system kept me organized and
-                  ahead of every deadline.&quot;
-                </p>
+                  <p className="italic opacity-80">
+                    "The college matching feature introduced me to schools I
+                    hadn't considered that ended up being perfect fits for my
+                    interests and goals."
+                  </p>
+                </GradientCard>
+
+                <GradientCard className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="h-12 w-12 rounded-full bg-pink-500/10">
+                      {/* User avatar could go here */}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">James Wilson</h4>
+                      <p className="text-sm opacity-70">MIT '23</p>
+                    </div>
+                  </div>
+                  <p className="italic opacity-80">
+                    "The application tracker kept me organized through the
+                    entire process. I never missed a deadline, and I could see
+                    my progress at a glance."
+                  </p>
+                </GradientCard>
               </div>
             </div>
-          </div>
+          </GradientBackground>
         </section>
 
         {/* CTA Section */}
-        <section className="relative isolate overflow-hidden bg-gradient-to-br from-indigo-600 to-indigo-700 py-16 sm:py-24 lg:py-32">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),theme(colors.indigo.800))] opacity-20"></div>
-          <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white/10 shadow-xl shadow-indigo-600/10 ring-1 ring-white/10"></div>
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-              <div className="max-w-xl lg:max-w-lg">
-                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  Start Your College Journey Today
-                </h2>
-                <p className="mt-4 text-lg leading-8 text-indigo-100">
-                  Join thousands of students who are using UniPathAI to
-                  streamline their college application process.
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                  <Link href="/register">
-                    <Button
-                      size="lg"
-                      className="bg-white text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 w-full sm:w-auto"
-                    >
-                      Get Started Free
-                    </Button>
-                  </Link>
-                  <Link href="/pricing">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-white text-white hover:bg-white/10 w-full sm:w-auto"
-                    >
-                      See Pricing
-                    </Button>
-                  </Link>
+        <section className="relative isolate overflow-hidden py-16 sm:py-24 lg:py-32">
+          <GradientBackground showAccents={false}>
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <div className="relative rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 p-8 md:p-12 shadow-xl overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-800/30 via-transparent to-transparent"></div>
+                <div className="mx-auto relative z-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-8 lg:max-w-none lg:grid-cols-2 items-center">
+                  <div className="max-w-xl lg:max-w-lg">
+                    <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                      Start Your College Journey Today
+                    </h2>
+                    <p className="mt-4 text-lg text-white/80">
+                      Join thousands of students who are using UniPathAI to
+                      streamline their college application process.
+                    </p>
+                    <div className="mt-6 flex flex-col sm:flex-row gap-4">
+                      <Link href="/register">
+                        <Button
+                          size="lg"
+                          className="bg-white text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 w-full sm:w-auto"
+                        >
+                          Get Started Free
+                        </Button>
+                      </Link>
+                      <Link href="/pricing">
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          className="border-white text-white hover:bg-white/10 w-full sm:w-auto"
+                        >
+                          See Pricing
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="hidden lg:block">
+                    <FeatureCards />
+                  </div>
                 </div>
               </div>
-              <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
-                <div className="flex flex-col items-start">
-                  <div className="rounded-md bg-white/10 p-2 ring-1 ring-white/20">
-                    <Shield className="h-6 w-6 text-white" />
-                  </div>
-                  <dt className="mt-4 font-semibold text-white">
-                    Secure & Private
-                  </dt>
-                  <dd className="mt-2 leading-7 text-indigo-100">
-                    Your data is encrypted and protected. We follow FERPA
-                    guidelines for student privacy.
-                  </dd>
-                </div>
-                <div className="flex flex-col items-start">
-                  <div className="rounded-md bg-white/10 p-2 ring-1 ring-white/20">
-                    <GraduationCap className="h-6 w-6 text-white" />
-                  </div>
-                  <dt className="mt-4 font-semibold text-white">
-                    Expert Guidance
-                  </dt>
-                  <dd className="mt-2 leading-7 text-indigo-100">
-                    AI-powered insights combined with expert counselor support
-                    when you need it.
-                  </dd>
-                </div>
-              </dl>
             </div>
-          </div>
+          </GradientBackground>
         </section>
       </main>
 

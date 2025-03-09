@@ -3,8 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d1117;
+  --foreground: #f8fafc;
+
+  /* Gradient Colors */
+  --gradient-primary-start: #0d1117;
+  --gradient-primary-end: #111827;
+  --gradient-accent-1: rgba(99, 102, 241, 0.15);
+  --gradient-accent-2: rgba(168, 85, 247, 0.15);
+  --gradient-accent-3: rgba(236, 72, 153, 0.15);
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --card-border: rgba(30, 41, 59, 0.5);
+
+  /* Accent colors for feature items */
+  --feature-indigo-bg: rgba(67, 56, 202, 0.15);
+  --feature-indigo-text: rgb(165, 180, 252);
+  --feature-purple-bg: rgba(126, 34, 206, 0.15);
+  --feature-purple-text: rgb(216, 180, 254);
+  --feature-pink-bg: rgba(190, 24, 93, 0.15);
+  --feature-pink-text: rgb(249, 168, 212);
+  --feature-blue-bg: rgba(37, 99, 235, 0.15);
+  --feature-blue-text: rgb(147, 197, 253);
+  --feature-red-bg: rgba(220, 38, 38, 0.15);
+  --feature-red-text: rgb(252, 165, 165);
+  --feature-green-bg: rgba(22, 163, 74, 0.15);
+  --feature-green-text: rgb(134, 239, 172);
+  --feature-yellow-bg: rgba(202, 138, 4, 0.15);
+  --feature-yellow-text: rgb(253, 224, 71);
 }
 
 @theme inline {
@@ -14,15 +39,217 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f8f8f8;
+    --foreground: #0f172a;
+
+    /* Gradient Colors */
+    --gradient-primary-start: #f8f8f8;
+    --gradient-primary-end: #ffffff;
+    --gradient-accent-1: rgba(99, 102, 241, 0.08);
+    --gradient-accent-2: rgba(168, 85, 247, 0.08);
+    --gradient-accent-3: rgba(236, 72, 153, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(226, 232, 240, 0.7);
+
+    /* Accent colors for feature items */
+    --feature-indigo-bg: rgba(99, 102, 241, 0.1);
+    --feature-indigo-text: rgb(67, 56, 202);
+    --feature-purple-bg: rgba(168, 85, 247, 0.1);
+    --feature-purple-text: rgb(126, 34, 206);
+    --feature-pink-bg: rgba(236, 72, 153, 0.1);
+    --feature-pink-text: rgb(190, 24, 93);
+    --feature-blue-bg: rgba(37, 99, 235, 0.1);
+    --feature-blue-text: rgb(29, 78, 216);
+    --feature-red-bg: rgba(220, 38, 38, 0.1);
+    --feature-red-text: rgb(185, 28, 28);
+    --feature-green-bg: rgba(22, 163, 74, 0.1);
+    --feature-green-text: rgb(21, 128, 61);
+    --feature-yellow-bg: rgba(202, 138, 4, 0.1);
+    --feature-yellow-text: rgb(161, 98, 7);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  color-scheme: dark light;
+}
+
+/* Gradient background component */
+.gradient-background {
+  position: relative;
+  z-index: 0;
+}
+
+.gradient-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--gradient-primary-start),
+    var(--gradient-primary-end)
+  );
+  z-index: -1;
+}
+
+/* Gradient accent elements */
+.gradient-accent-1 {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--gradient-accent-1);
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.gradient-accent-2 {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--gradient-accent-2);
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  animation: pulse 10s ease-in-out infinite alternate-reverse;
+}
+
+.gradient-accent-3 {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--gradient-accent-3);
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  animation: pulse 12s ease-in-out infinite alternate;
+}
+
+/* Card styling with gradient border */
+.gradient-card {
+  border-radius: 0.75rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.gradient-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Blog Content Styles */
+.blog-content h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--feature-indigo-text);
+}
+
+.blog-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--feature-purple-text);
+}
+
+.blog-content p {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+}
+
+.blog-content a {
+  color: #6366f1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.blog-content a:hover {
+  color: #4f46e5;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-content ul {
+  list-style-type: disc;
+}
+
+.blog-content ol {
+  list-style-type: decimal;
+}
+
+.blog-content li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid #6366f1;
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+  background-color: rgba(99, 102, 241, 0.05);
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.blog-content code {
+  background-color: rgba(99, 102, 241, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.blog-content pre {
+  background-color: rgba(17, 24, 39, 0.8);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.blog-content pre code {
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.9em;
+  color: #f3f4f6;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
