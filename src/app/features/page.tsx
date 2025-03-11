@@ -13,7 +13,6 @@ import {
   Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FeatureCard } from "@/components/feature-card";
 import Link from "next/link";
 import Image from "next/image";
 import { GradientBackground } from "@/components/ui/gradient-background";
@@ -36,7 +35,7 @@ export default function FeaturesPage() {
               <div className="text-center max-w-3xl mx-auto">
                 <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
                   Powerful Features for Your
-                  <span className="block mt-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <span className="block mt-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent pb-2 leading-[1.3] mb-1">
                     College Journey
                   </span>
                 </h1>
@@ -306,7 +305,7 @@ export default function FeaturesPage() {
                   </div>
                   <p className="opacity-80">
                     Connect with other students, share experiences, and get
-                    advice from those who've been through the process.
+                    advice from those who&apos;ve been through the process.
                   </p>
                 </GradientCard>
 
@@ -321,7 +320,7 @@ export default function FeaturesPage() {
                   </div>
                   <p className="opacity-80">
                     Get personalized essay topic suggestions based on your
-                    experiences, interests, and the specific college's
+                    experiences, interests, and the specific college&apos;s
                     requirements.
                   </p>
                 </GradientCard>

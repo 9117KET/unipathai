@@ -35,12 +35,6 @@ export function Navbar() {
               >
                 About
               </Link>
-              <Link
-                href="/blog"
-                className="text-gray-700 hover:text-indigo-600 transition-colors text-sm font-medium"
-              >
-                Blog
-              </Link>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
@@ -95,13 +89,6 @@ export function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               About
-            </Link>
-            <Link
-              href="/blog"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
             </Link>
             <div className="pt-4 pb-3 border-t border-indigo-100">
               <div className="flex items-center px-3">

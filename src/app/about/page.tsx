@@ -32,7 +32,7 @@ export default function AboutPage() {
               <div className="text-center">
                 <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
                   <span className="block">About</span>
-                  <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent pb-2 leading-[1.3] mb-1">
                     UniPathAI
                   </span>
                 </h1>
@@ -132,95 +132,95 @@ export default function AboutPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <div className="bg-white dark:bg-gray-800/90 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
                 <div className="flex flex-col items-center">
-                  <div className="h-14 w-14 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
-                    <GraduationCap className="h-8 w-8 text-indigo-500" />
+                  <div className="h-14 w-14 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center mb-4">
+                    <GraduationCap className="h-8 w-8 text-indigo-500 dark:text-indigo-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">
                     College Matching
                   </h3>
                 </div>
-                <p className="text-center">
+                <p className="text-center dark:text-gray-200">
                   AI-driven college recommendations based on your academic
                   profile, interests, and preferences, helping you discover your
                   ideal schools.
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <div className="bg-white dark:bg-gray-800/90 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
                 <div className="flex flex-col items-center">
-                  <div className="h-14 w-14 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4">
-                    <BookOpen className="h-8 w-8 text-purple-500" />
+                  <div className="h-14 w-14 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mb-4">
+                    <BookOpen className="h-8 w-8 text-purple-500 dark:text-purple-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">
                     Essay Assistance
                   </h3>
                 </div>
-                <p className="text-center">
+                <p className="text-center dark:text-gray-200">
                   Smart AI tools that help you craft compelling personal
                   statements and supplemental essays that stand out to
                   admissions committees.
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <div className="bg-white dark:bg-gray-800/90 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
                 <div className="flex flex-col items-center">
-                  <div className="h-14 w-14 rounded-full bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-4">
-                    <Target className="h-8 w-8 text-pink-500" />
+                  <div className="h-14 w-14 rounded-full bg-pink-100 dark:bg-pink-900/50 flex items-center justify-center mb-4">
+                    <Target className="h-8 w-8 text-pink-500 dark:text-pink-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">
                     Application Tracking
                   </h3>
                 </div>
-                <p className="text-center">
+                <p className="text-center dark:text-gray-200">
                   Comprehensive dashboard to track all your applications,
                   deadlines, and tasks in one place, ensuring nothing falls
                   through the cracks.
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <div className="bg-white dark:bg-gray-800/90 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
                 <div className="flex flex-col items-center">
-                  <div className="h-14 w-14 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
-                    <Users className="h-8 w-8 text-indigo-500" />
+                  <div className="h-14 w-14 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center mb-4">
+                    <Users className="h-8 w-8 text-indigo-500 dark:text-indigo-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">
                     Mentorship & Community
                   </h3>
                 </div>
-                <p className="text-center">
+                <p className="text-center dark:text-gray-200">
                   Connect with counselors, mentors, and peers who can provide
                   guidance and support throughout your application journey.
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <div className="bg-white dark:bg-gray-800/90 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
                 <div className="flex flex-col items-center">
-                  <div className="h-14 w-14 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4">
-                    <Shield className="h-8 w-8 text-purple-500" />
+                  <div className="h-14 w-14 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mb-4">
+                    <Shield className="h-8 w-8 text-purple-500 dark:text-purple-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">
                     Privacy & Security
                   </h3>
                 </div>
-                <p className="text-center">
+                <p className="text-center dark:text-gray-200">
                   Comprehensive data protection measures ensuring your personal
                   information and application materials remain secure and
                   private.
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <div className="bg-white dark:bg-gray-800/90 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
                 <div className="flex flex-col items-center">
-                  <div className="h-14 w-14 rounded-full bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mb-4">
-                    <Globe className="h-8 w-8 text-pink-500" />
+                  <div className="h-14 w-14 rounded-full bg-pink-100 dark:bg-pink-900/50 flex items-center justify-center mb-4">
+                    <Globe className="h-8 w-8 text-pink-500 dark:text-pink-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold mb-3 dark:text-white">
                     Global Accessibility
                   </h3>
                 </div>
-                <p className="text-center">
+                <p className="text-center dark:text-gray-200">
                   Support for international students with region-specific
                   guidance for applications to universities around the world.
                 </p>
@@ -230,49 +230,55 @@ export default function AboutPage() {
         </section>
 
         {/* Our Approach */}
-        <section className="py-16 bg-gray-50/50 dark:bg-gray-900/50">
+        <section className="py-16 bg-gray-50/50 dark:bg-gray-900/60">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl dark:text-white">
                 Our Approach
               </h2>
-              <p className="mt-4 mx-auto max-w-3xl text-lg opacity-90">
+              <p className="mt-4 mx-auto max-w-3xl text-lg opacity-90 dark:text-gray-200">
                 We believe in combining the power of AI with human expertise to
                 provide the most effective assistance for college applications.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="bg-indigo-100 dark:bg-indigo-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center bg-white/60 dark:bg-gray-800/60 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
+                <div className="bg-indigo-100 dark:bg-indigo-900/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Brain className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">AI-Powered</h3>
-                <p>
+                <h3 className="text-xl font-semibold mb-3 dark:text-white">
+                  AI-Powered
+                </h3>
+                <p className="dark:text-gray-200">
                   Our platform leverages advanced AI models like GPT-4 to
                   provide intelligent, context-aware assistance for essays,
                   college matches, and application strategies.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="bg-purple-100 dark:bg-purple-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center bg-white/60 dark:bg-gray-800/60 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
+                <div className="bg-purple-100 dark:bg-purple-900/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-purple-600 dark:text-purple-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Human-Centered</h3>
-                <p>
+                <h3 className="text-xl font-semibold mb-3 dark:text-white">
+                  Human-Centered
+                </h3>
+                <p className="dark:text-gray-200">
                   We maintain a human element through counselor guidance,
                   mentorship, and community support, ensuring technology
                   enhances rather than replaces personal connections.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="bg-pink-100 dark:bg-pink-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center bg-white/60 dark:bg-gray-800/60 p-6 rounded-lg shadow-sm border border-transparent dark:border-gray-700">
+                <div className="bg-pink-100 dark:bg-pink-900/50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Target className="h-8 w-8 text-pink-600 dark:text-pink-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Results-Oriented</h3>
-                <p>
+                <h3 className="text-xl font-semibold mb-3 dark:text-white">
+                  Results-Oriented
+                </h3>
+                <p className="dark:text-gray-200">
                   Everything we build is focused on improving outcomes for
                   students, helping them gain admissions to programs that match
                   their goals and potential.

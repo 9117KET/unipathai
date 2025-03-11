@@ -110,7 +110,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="flex flex-col space-y-16 md:flex-row md:space-y-0 md:space-x-8">
+              <div className="flex flex-col space-y-16 md:flex-row md:space-y-0 md:space-x-8 items-center">
                 <div className="relative flex flex-col items-center md:flex-1">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400">
                     <span className="text-xl font-bold">1</span>
@@ -124,6 +124,18 @@ export default function Home() {
                   </p>
                 </div>
 
+                {/* Arrow for desktop */}
+                <div className="hidden md:flex items-center justify-center md:flex-none">
+                  <ArrowRight className="h-8 w-8 text-indigo-400 animate-pulse" />
+                </div>
+
+                {/* Arrow for mobile */}
+                <div className="flex md:hidden items-center justify-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/10">
+                    <ArrowRight className="h-5 w-5 text-indigo-400 rotate-90" />
+                  </div>
+                </div>
+
                 <div className="relative flex flex-col items-center md:flex-1">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-purple-500/10 text-purple-400">
                     <span className="text-xl font-bold">2</span>
@@ -133,6 +145,18 @@ export default function Home() {
                     Our AI matches you with colleges that align with your
                     academic profile and preferences.
                   </p>
+                </div>
+
+                {/* Arrow for desktop */}
+                <div className="hidden md:flex items-center justify-center md:flex-none">
+                  <ArrowRight className="h-8 w-8 text-purple-400 animate-pulse" />
+                </div>
+
+                {/* Arrow for mobile */}
+                <div className="flex md:hidden items-center justify-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/10">
+                    <ArrowRight className="h-5 w-5 text-purple-400 rotate-90" />
+                  </div>
                 </div>
 
                 <div className="relative flex flex-col items-center md:flex-1">

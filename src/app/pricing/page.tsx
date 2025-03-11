@@ -19,7 +19,7 @@ export default function PricingPage() {
               <div className="text-center mx-auto max-w-3xl mb-16">
                 <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
                   Choose the Right Plan for Your
-                  <span className="block mt-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  <span className="block mt-2 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent pb-2 leading-[1.3] mb-1">
                     College Journey
                   </span>
                 </h1>

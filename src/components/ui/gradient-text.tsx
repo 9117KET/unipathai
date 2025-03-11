@@ -4,7 +4,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 interface GradientTextProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
   variant?:
@@ -21,17 +21,19 @@ interface GradientTextProps {
   hover?: boolean;
 }
 
-export const GradientText = ({
+export const GradientText = <T extends React.ElementType = "span">({
   children,
   className,
-  as: Component = "span",
+  as,
   variant = "primary",
   customGradient,
   animated = false,
   animationSpeed = "medium",
   hover = false,
   ...props
-}: GradientTextProps & React.HTMLAttributes<HTMLElement>) => {
+}: GradientTextProps &
+  Omit<React.ComponentPropsWithoutRef<T>, keyof GradientTextProps>) => {
+  const Component = as || "span";
   const variantMap = {
     primary: "from-uni-primary to-uni-accent",
     secondary: "from-uni-accent to-blue-500",
@@ -64,30 +66,42 @@ export const GradientText = ({
   );
 };
 
-export const H1 = (props: GradientTextProps) => (
-  <GradientText
+export const H1 = (
+  props: Omit<React.ComponentPropsWithoutRef<typeof GradientText>, "as">
+) => (
+  <GradientText<"h1">
     as="h1"
-    className="text-3xl md:text-4xl font-bold mb-4"
+    className={cn("text-3xl md:text-4xl font-bold mb-4", props.className)}
     {...props}
   />
 );
 
-export const H2 = (props: GradientTextProps) => (
-  <GradientText
+export const H2 = (
+  props: Omit<React.ComponentPropsWithoutRef<typeof GradientText>, "as">
+) => (
+  <GradientText<"h2">
     as="h2"
-    className="text-2xl md:text-3xl font-semibold mb-3"
+    className={cn("text-2xl md:text-3xl font-semibold mb-3", props.className)}
     {...props}
   />
 );
 
-export const H3 = (props: GradientTextProps) => (
-  <GradientText
+export const H3 = (
+  props: Omit<React.ComponentPropsWithoutRef<typeof GradientText>, "as">
+) => (
+  <GradientText<"h3">
     as="h3"
-    className="text-xl md:text-2xl font-semibold mb-2"
+    className={cn("text-xl md:text-2xl font-semibold mb-2", props.className)}
     {...props}
   />
 );
 
-export const H4 = (props: GradientTextProps) => (
-  <GradientText as="h4" className="text-lg font-medium mb-2" {...props} />
+export const H4 = (
+  props: Omit<React.ComponentPropsWithoutRef<typeof GradientText>, "as">
+) => (
+  <GradientText<"h4">
+    as="h4"
+    className={cn("text-lg font-medium mb-2", props.className)}
+    {...props}
+  />
 );

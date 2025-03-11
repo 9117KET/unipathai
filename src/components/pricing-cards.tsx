@@ -111,7 +111,7 @@ export function PricingCards() {
     },
     {
       name: "Family",
-      price: "$25",
+      price: "$30",
       description: "For families with multiple students applying",
       features: [
         "All Pro features",

@@ -181,12 +181,27 @@ body {
   border: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .gradient-card:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
-  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Improved contrast for dark mode cards */
+.dark .gradient-card {
+  background: rgba(25, 30, 50, 0.9);
+  border-color: rgba(60, 70, 100, 0.7);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(99, 102, 241, 0.2);
+}
+
+/* Improved contrast for light mode cards */
+.light .gradient-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(220, 225, 235, 0.8);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(99, 102, 241, 0.1);
 }
 
 /* Blog Content Styles */
@@ -357,4 +372,25 @@ body {
     radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 0.04) 0px, transparent 50%),
     radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 0.04) 0px, transparent 50%);
   position: relative;
+}
+
+/* Featured card highlight effect */
+.card-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-highlight::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 0;
+  background: linear-gradient(to bottom, #4f46e5, #7c3aed);
+  transition: height 0.3s ease;
+}
+
+.card-highlight:hover::after {
+  height: 100%;
 }
