@@ -8,6 +8,8 @@ import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/components/auth/auth-provider";
 import FirebaseProvider from "@/components/firebase/firebase-provider";
 import { GradientBackground } from "@/components/ui/gradient-background";
+import { ClientBodyFix } from "@/components/client-body-fix";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,11 +48,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${inter.className} h-full`}>
+    <html lang="en" className="h-full" suppressHydrationWarning>
+      <head>
+        <Script src="/firebase-config.js" strategy="beforeInteractive" />
+      </head>
+      <body className={`${inter.className} h-full`} suppressHydrationWarning>
+        <ClientBodyFix />
         <AuthProvider>
           <FirebaseProvider>
-            <ThemeProvider attribute="class" defaultTheme="dark">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem={false}
+            >
               <GradientBackground className="min-h-screen">
                 <Navbar />
                 <main className="min-h-screen pt-16">{children}</main>

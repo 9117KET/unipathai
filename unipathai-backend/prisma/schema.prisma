@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  COUNSELOR
+  PARENT
+  UNIVERSITY
+  ADMIN
+}
+
+enum SubscriptionTier {
+  FREE
+  PREMIUM
+}
+
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  hashedPassword  String
+  firstName       String
+  lastName        String
+  role            UserRole
+  subscriptionTier SubscriptionTier @default(FREE)
+  profileCompleted Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  // Relations
+  profile         Profile?
+  studentApplications Application[] @relation("StudentApplications")
+  counselorApplications Application[] @relation("CounselorApplications")
+  mentorRelationsAsMentor MentorRelation[] @relation("Mentor")
+  mentorRelationsAsStudent MentorRelation[] @relation("Student")
+}
+
+model Profile {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio           String?
+  location      String?
+  educationLevel String?
+  interests     String[]
+  testScores    Json?    // Store SAT/ACT scores as JSON
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model University {
+  id            String   @id @default(uuid())
+  name          String
+  location      String
+  description   String?
+  website       String?
+  programs      String[]
+  requirements  Json?    // Store admission requirements as JSON
+  rankings      Json?    // Store rankings as JSON
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  applications  Application[]
+}
+
+model Application {
+  id            String   @id @default(uuid())
+  studentId     String
+  student       User     @relation("StudentApplications", fields: [studentId], references: [id])
+  universityId  String
+  university    University @relation(fields: [universityId], references: [id])
+  counselorId   String?
+  counselor     User?    @relation("CounselorApplications", fields: [counselorId], references: [id])
+  status        String   @default("In Progress") // In Progress, Submitted, Accepted, Rejected, etc.
+  components    Json     // Track essay, recommendations, etc. as JSON
+  deadline      DateTime?
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Essay {
+  id            String   @id @default(uuid())
+  title         String
+  content       String
+  feedback      String?
+  version       Int      @default(1)
+  aiAssisted    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model MentorRelation {
+  id            String   @id @default(uuid())
+  mentorId      String
+  mentor        User     @relation("Mentor", fields: [mentorId], references: [id])
+  studentId     String
+  student       User     @relation("Student", fields: [studentId], references: [id])
+  status        String   @default("Pending") // Pending, Active, Inactive
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([mentorId, studentId])
+}
+
+model Subscription {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  stripeCustomerId String?
+  stripeSubscriptionId String?
+  tier          SubscriptionTier
+  startDate     DateTime
+  endDate       DateTime?
+  status        String   // Active, Canceled, Past Due
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

@@ -8,6 +8,7 @@ interface ThemeProviderProps {
   children: React.ReactNode;
   attribute?: NextThemesProviderProps["attribute"];
   defaultTheme?: string;
+  enableSystem?: boolean;
 }
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {

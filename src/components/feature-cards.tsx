@@ -20,7 +20,10 @@ function FeatureItem({ title, description, icon, variant }: FeatureItemProps) {
 
   return (
     <div
-      className={cn("rounded-xl p-5", variantStyles[variant])}
+      className={cn(
+        "rounded-xl p-5 hover:scale-[1.03] transition-transform duration-300",
+        variantStyles[variant]
+      )}
       style={
         variant === "indigo"
           ? {
@@ -42,7 +45,7 @@ function FeatureItem({ title, description, icon, variant }: FeatureItemProps) {
         <div className="text-current">{icon}</div>
         <div>
           <h3 className="text-xl font-semibold text-current">{title}</h3>
-          <p className="text-current/80 text-sm">{description}</p>
+          <p className="text-current/80 text-sm mt-1">{description}</p>
         </div>
       </div>
     </div>
@@ -52,13 +55,13 @@ function FeatureItem({ title, description, icon, variant }: FeatureItemProps) {
 export function FeatureCards() {
   return (
     <div
-      className="rounded-xl border border-slate-800/50 backdrop-blur-sm"
+      className="rounded-xl border border-slate-800/50 backdrop-blur-sm shadow-lg overflow-hidden"
       style={{
         backgroundColor: "var(--card-bg)",
         borderColor: "var(--card-border)",
       }}
     >
-      <div className="space-y-5 p-6">
+      <div className="space-y-6 p-7">
         <FeatureItem
           title="AI Essay Assistant"
           description="Get real-time feedback on your essays"

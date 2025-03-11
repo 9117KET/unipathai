@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { GradientCard } from "@/components/ui/gradient-card";
-import { BookOpen, Code, GraduationCap, Award, Clock } from "lucide-react";
+import {
+  BookOpen,
+  Code,
+  GraduationCap,
+  Award,
+  Clock,
+  MessageSquare,
+} from "lucide-react";
 
 export function DemoGradientCards() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -38,20 +45,28 @@ export function DemoGradientCards() {
       description: "Discover scholarships tailored to your profile",
       variant: "secondary",
     },
+    {
+      icon: MessageSquare,
+      title: "AI Advisor Chat",
+      description: "Get instant answers to all your college questions",
+      variant: "accent",
+    },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-8 py-10">
       {features.map((feature, index) => (
         <div
           key={index}
-          className={hoveredIndex === index ? "scale-105" : ""}
+          className={`transition-transform duration-300 ${
+            hoveredIndex === index ? "scale-105" : ""
+          }`}
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           <GradientCard
             variant={feature.variant as "primary" | "secondary" | "accent"}
-            className={`p-6 transition-all duration-300 ${
+            className={`h-full p-6 transition-all duration-300 ${
               hoveredIndex === index ? "ring-2 ring-indigo-400/50" : ""
             }`}
           >
@@ -63,7 +78,7 @@ export function DemoGradientCards() {
             </div>
             <p className="text-sm opacity-80">{feature.description}</p>
 
-            <div className="mt-4 flex justify-between items-center">
+            <div className="mt-6 flex justify-between items-center">
               <div className="text-xs bg-indigo-500/10 px-3 py-1 rounded-full text-indigo-300">
                 In Development
               </div>

@@ -1,55 +1,43 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ArrowRight,
-  GraduationCap,
-  Sparkles,
-  Target,
-  Clock,
-  Shield,
-  CheckCircle,
-  Users,
-  Settings,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FeatureCard } from "@/components/feature-card";
 import { DemoGradientCards } from "@/components/demo-gradient-cards";
 import { GradientBackground } from "@/components/ui/gradient-background";
 import { FeatureCards } from "@/components/feature-cards";
-import { GradientCard } from "@/components/ui/gradient-card";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
         {/* Hero Section with new gradient style */}
-        <section className="relative py-20 sm:py-32">
+        <section className="relative py-24 sm:py-32 lg:py-36">
           <GradientBackground
             accentPositions={{
-              accent1: { top: "5%", left: "30%" },
-              accent2: { bottom: "10%", right: "10%" },
-              accent3: { top: "50%", left: "5%" },
+              accent1: { top: "2%", left: "25%" },
+              accent2: { bottom: "5%", right: "15%" },
+              accent3: { top: "40%", left: "10%" },
             }}
           >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-20">
-                <div>
+              <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24 items-center">
+                <div className="max-w-xl">
                   <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                    <span className="block">Navigate Your</span>
-                    <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <span className="block mb-2">Navigate Your</span>
+                    <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent pb-2 leading-[1.3] mb-1">
                       College Journey
                     </span>
                   </h1>
-                  <p className="mt-6 max-w-lg text-lg leading-8 opacity-90">
+                  <p className="mt-8 text-lg leading-7 opacity-90 max-w-md">
                     AI-powered assistance for college applications, essays, and
                     finding your perfect college match.
                   </p>
-                  <div className="mt-10 flex flex-col sm:flex-row gap-4">
+                  <div className="mt-12 flex flex-col sm:flex-row gap-5">
                     <Link href="/register">
                       <Button
                         size="lg"
-                        className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 w-full sm:w-auto"
+                        className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 w-full sm:w-auto shadow-md"
                       >
                         Get Started Free
                         <ArrowRight className="ml-2 h-4 w-4" />
@@ -68,8 +56,10 @@ export default function Home() {
                 </div>
 
                 {/* New feature cards that match the image */}
-                <div className="relative">
-                  <FeatureCards />
+                <div className="relative lg:ml-auto">
+                  <div className="transform lg:translate-y-6 lg:scale-110 transition-transform duration-500">
+                    <FeatureCards />
+                  </div>
                 </div>
               </div>
             </div>
@@ -77,7 +67,7 @@ export default function Home() {
         </section>
 
         {/* Feature Cards Section */}
-        <section className="py-16">
+        <section className="py-20 sm:py-28">
           <GradientBackground
             accentPositions={{
               accent1: { top: "30%", right: "20%" },
@@ -86,55 +76,17 @@ export default function Home() {
             }}
           >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-3xl mx-auto mb-10">
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              <div className="text-center max-w-3xl mx-auto mb-12">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                   Explore Our Features
                 </h2>
-                <p className="mt-4 text-lg opacity-80">
+                <p className="mt-5 text-lg opacity-80 max-w-2xl mx-auto">
                   Discover how UniPathAI makes your college application journey
                   smoother and more successful.
                 </p>
               </div>
 
               <DemoGradientCards />
-            </div>
-          </GradientBackground>
-        </section>
-
-        {/* Stats Section */}
-        <section className="py-12 sm:py-16">
-          <GradientBackground showAccents={false}>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 gap-y-8 text-center sm:grid-cols-2 sm:gap-12 lg:grid-cols-4">
-                <div>
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-500/10">
-                    <Users className="h-10 w-10 text-indigo-400" />
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold">5,000+</h3>
-                  <p className="mt-2 text-base opacity-70">Active students</p>
-                </div>
-                <div>
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-purple-500/10">
-                    <GraduationCap className="h-10 w-10 text-purple-400" />
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold">500+</h3>
-                  <p className="mt-2 text-base opacity-70">College partners</p>
-                </div>
-                <div>
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-pink-500/10">
-                    <CheckCircle className="h-10 w-10 text-pink-400" />
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold">92%</h3>
-                  <p className="mt-2 text-base opacity-70">Acceptance rate</p>
-                </div>
-                <div>
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-500/10">
-                    <Shield className="h-10 w-10 text-indigo-400" />
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold">100%</h3>
-                  <p className="mt-2 text-base opacity-70">Secure & private</p>
-                </div>
-              </div>
             </div>
           </GradientBackground>
         </section>
@@ -195,80 +147,6 @@ export default function Home() {
                     and meet every deadline.
                   </p>
                 </div>
-              </div>
-            </div>
-          </GradientBackground>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-20">
-          <GradientBackground showAccents={false}>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-3xl mx-auto mb-16">
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                  What Our Users Say
-                </h2>
-                <p className="mt-4 text-lg opacity-80">
-                  Hear from students who transformed their college application
-                  journey with UniPathAI.
-                </p>
-              </div>
-
-              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                <GradientCard className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="h-12 w-12 rounded-full bg-indigo-500/10">
-                      {/* User avatar could go here */}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Alex Thompson</h4>
-                      <p className="text-sm opacity-70">
-                        Harvard University '25
-                      </p>
-                    </div>
-                  </div>
-                  <p className="italic opacity-80">
-                    "The AI essay feedback was incredibly helpful. It helped me
-                    refine my personal statement and got me accepted to my dream
-                    school!"
-                  </p>
-                </GradientCard>
-
-                <GradientCard className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="h-12 w-12 rounded-full bg-purple-500/10">
-                      {/* User avatar could go here */}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Maya Patel</h4>
-                      <p className="text-sm opacity-70">
-                        Stanford University '24
-                      </p>
-                    </div>
-                  </div>
-                  <p className="italic opacity-80">
-                    "The college matching feature introduced me to schools I
-                    hadn't considered that ended up being perfect fits for my
-                    interests and goals."
-                  </p>
-                </GradientCard>
-
-                <GradientCard className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="h-12 w-12 rounded-full bg-pink-500/10">
-                      {/* User avatar could go here */}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">James Wilson</h4>
-                      <p className="text-sm opacity-70">MIT '23</p>
-                    </div>
-                  </div>
-                  <p className="italic opacity-80">
-                    "The application tracker kept me organized through the
-                    entire process. I never missed a deadline, and I could see
-                    my progress at a glance."
-                  </p>
-                </GradientCard>
               </div>
             </div>
           </GradientBackground>
