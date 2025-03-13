@@ -3,6 +3,7 @@ import { adminMessaging } from "@/lib/firebase/firebase-admin";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth-options";
 import { UserRole } from "@/types/user";
+import { MulticastMessage } from "firebase-admin/messaging";
 
 export async function POST(request: NextRequest) {
   try {
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create the message
-    const message = {
+    const message: MulticastMessage = {
       notification: {
         title,
         body,
@@ -54,13 +55,13 @@ export async function POST(request: NextRequest) {
       },
       apns: {
         headers: {
-          "apns-expiration": Math.floor(Date.now() / 1000) + 86400, // 1 day in seconds
+          "apns-expiration": String(Math.floor(Date.now() / 1000) + 86400), // 1 day in seconds
         },
       },
     };
 
     // Send the message
-    const response = await adminMessaging.sendMulticast(message);
+    const response = await adminMessaging.sendEachForMulticast(message);
 
     return NextResponse.json({
       success: true,

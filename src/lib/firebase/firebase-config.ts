@@ -2,7 +2,7 @@ import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
-import { getMessaging, isSupported } from "firebase/messaging";
+import { getMessaging, isSupported, Messaging } from "firebase/messaging";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -30,7 +30,7 @@ const storage = getStorage(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 // Initialize messaging conditionally (only in browser environments that support it)
-let messaging: any = null;
+let messaging: Messaging | null = null;
 
 // This code will run only on the client side
 if (typeof window !== "undefined") {
