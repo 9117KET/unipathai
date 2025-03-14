@@ -17,7 +17,7 @@ export default function DashboardPage() {
 
   if (isLoading || !user) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex h-full items-center justify-center p-8">
         <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
       </div>
     );
@@ -25,7 +25,7 @@ export default function DashboardPage() {
 
   // Render the appropriate dashboard based on user role
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
       {user.role === UserRole.STUDENT && (
         <RoleGuard allowedRoles={[UserRole.STUDENT]}>
           <StudentDashboard user={user} />
@@ -55,6 +55,6 @@ export default function DashboardPage() {
           <AdminDashboard user={user} />
         </RoleGuard>
       )}
-    </div>
+    </>
   );
 }

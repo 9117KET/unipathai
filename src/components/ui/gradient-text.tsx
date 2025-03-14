@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 interface GradientTextProps {
   children?: React.ReactNode;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   variant?:
     | "primary"
     | "secondary"

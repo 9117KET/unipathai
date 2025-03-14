@@ -43,7 +43,9 @@ interface EssayWorkspaceProps {
   user: User;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function EssayWorkspace({ user: _user }: EssayWorkspaceProps) {
+  // TODO: Implement user-specific essay loading when replacing mock data with user data
   const [essays, setEssays] = useState<Essay[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isCreationDialogOpen, setIsCreationDialogOpen] = useState(false);
@@ -68,8 +70,9 @@ export default function EssayWorkspace({ user: _user }: EssayWorkspaceProps) {
     fetchEssays();
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleCreateEssay = async (title: string, _prompt: string) => {
-    // Mock creating an essay
+    // TODO: Implement AI essay generation using the prompt parameter
     const newEssay: Essay = {
       id: Math.random().toString(36).substring(7),
       title,

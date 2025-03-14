@@ -45,13 +45,15 @@ const MOCK_ESSAYS: Record<string, Essay> = {
 
 interface EssayEditorProps {
   essayId: string;
+  // TODO: Will use the user object for permissions and personalization in the future
   user: User;
 }
 
 export default function EssayEditor({
   essayId,
-  user: _user,
-}: EssayEditorProps) {
+}: // TODO: Will use the user object for permissions and personalization in the future
+// user param is intentionally not destructured to avoid linter errors
+EssayEditorProps) {
   const [essay, setEssay] = useState<Essay | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);

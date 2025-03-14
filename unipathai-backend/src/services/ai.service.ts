@@ -1,19 +1,25 @@
 import OpenAI from "openai";
-import { ChatPromptTemplate } from "langchain/prompts";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { StringOutputParser } from "langchain/schema/output_parser";
+// TODO: Install langchain package and update imports
+// Install with: npm install langchain @langchain/openai
+/*
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { ChatOpenAI } from "@langchain/openai";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+*/
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Initialize LangChain model
+// TODO: Initialize LangChain model after installing required packages
+/*
 const model = new ChatOpenAI({
   openAIApiKey: process.env.OPENAI_API_KEY,
   modelName: "gpt-4",
   temperature: 0.7,
 });
+*/
 
 // Essay feedback service
 export const generateEssayFeedback = async (
@@ -21,10 +27,15 @@ export const generateEssayFeedback = async (
   prompt: string
 ) => {
   try {
-    const essayFeedbackPrompt = ChatPromptTemplate.fromMessages([
-      [
-        "system",
-        `You are an expert college admissions counselor with years of experience helping students craft compelling college application essays. 
+    // TODO: Implement with LangChain after installing required packages
+    // For now, use direct OpenAI API
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content: `You are an expert college admissions counselor with years of experience helping students craft compelling college application essays. 
       Your task is to provide constructive feedback on a student's essay. 
       Focus on the following aspects:
       1. Structure and flow
@@ -35,17 +46,17 @@ export const generateEssayFeedback = async (
       
       Provide specific suggestions for improvement, highlighting both strengths and areas that need work.
       Be encouraging but honest. Your goal is to help the student improve their essay while maintaining their authentic voice.`,
+        },
+        {
+          role: "user",
+          content: `Essay Prompt: ${prompt}\n\nEssay Content: ${essayContent}`,
+        },
       ],
-      ["user", `Essay Prompt: ${prompt}\n\nEssay Content: ${essayContent}`],
-    ]);
+      temperature: 0.7,
+      max_tokens: 1000,
+    });
 
-    const chain = essayFeedbackPrompt
-      .pipe(model)
-      .pipe(new StringOutputParser());
-
-    const feedback = await chain.invoke({});
-
-    return feedback;
+    return response.choices[0].message.content;
   } catch (error) {
     console.error("Error generating essay feedback:", error);
     throw new Error("Failed to generate essay feedback");
@@ -67,10 +78,15 @@ export const generateCollegeRecommendations = async (studentProfile: {
       ? JSON.stringify(testScores)
       : "Not provided";
 
-    const recommendationPrompt = ChatPromptTemplate.fromMessages([
-      [
-        "system",
-        `You are an expert college admissions counselor with extensive knowledge of universities worldwide.
+    // TODO: Implement with LangChain after installing required packages
+    // For now, use direct OpenAI API
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content: `You are an expert college admissions counselor with extensive knowledge of universities worldwide.
       Your task is to recommend 5 universities that would be a good fit for a student based on their profile.
       For each university, provide:
       1. Name and location
@@ -79,26 +95,23 @@ export const generateCollegeRecommendations = async (studentProfile: {
       4. Approximate acceptance rate or competitiveness
       
       Be specific and provide actionable recommendations. Focus on academic fit rather than just rankings.`,
-      ],
-      [
-        "user",
-        `Student Profile:
+        },
+        {
+          role: "user",
+          content: `Student Profile:
       - Interests: ${interestsString}
       - Preferred Location: ${location || "No preference"}
       - Test Scores: ${testScoresString}
       - Education Level: ${educationLevel || "Not specified"}
       
       Please recommend 5 universities that would be a good fit for this student.`,
+        },
       ],
-    ]);
+      temperature: 0.7,
+      max_tokens: 1000,
+    });
 
-    const chain = recommendationPrompt
-      .pipe(model)
-      .pipe(new StringOutputParser());
-
-    const recommendations = await chain.invoke({});
-
-    return recommendations;
+    return response.choices[0].message.content;
   } catch (error) {
     console.error("Error generating college recommendations:", error);
     throw new Error("Failed to generate college recommendations");
