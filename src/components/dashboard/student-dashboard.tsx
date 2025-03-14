@@ -10,6 +10,7 @@ import {
   Clock,
   CheckCircle2,
 } from "lucide-react";
+import Link from "next/link";
 
 interface StudentDashboardProps {
   user: User;
@@ -70,9 +71,11 @@ export default function StudentDashboard({ user }: StudentDashboardProps) {
             <span className="text-sm font-medium bg-purple-100 text-purple-600 rounded-full px-3 py-1">
               2 drafts
             </span>
-            <Button variant="link" className="text-purple-600 p-0">
-              Open Workspace
-            </Button>
+            <Link href="/dashboard/essays" passHref>
+              <Button variant="link" className="text-purple-600 p-0">
+                Open Workspace
+              </Button>
+            </Link>
           </div>
         </Card>
 
