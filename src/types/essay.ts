@@ -2,7 +2,7 @@ export interface Essay {
   id: string;
   title: string;
   content: string;
-  feedback?: string;
+  feedback?: EssayFeedback;
   version: number;
   aiAssisted: boolean;
   createdAt: Date;
@@ -18,8 +18,27 @@ export interface EssayPrompt {
 }
 
 export interface EssayFeedback {
+  overallAssessment: string;
   strengths: string[];
-  improvements: string[];
-  suggestions: string;
-  overallRating: number; // 1-10 scale
+  areasForImprovement: string[];
+  suggestions: string[];
+  score: number;
+  plagiarismConcerns: string[];
+}
+
+export interface EssayOutline {
+  hook: string;
+  bodyParagraphs: {
+    topic: string;
+    keyPoints: string[];
+  }[];
+  conclusion: string;
+}
+
+export interface EssayImprovements {
+  paragraphSuggestions: {
+    paragraphNumber: number;
+    suggestions: string[];
+  }[];
+  overallSuggestions: string[];
 }

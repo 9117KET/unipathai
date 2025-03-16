@@ -44,6 +44,7 @@ model User {
   
   // Firebase tokens for notifications
   notificationTokens UserNotificationToken[]
+  essays        Essay[]   // Add relation to essays
 }
 
 // Store Firebase Cloud Messaging tokens for push notifications
@@ -120,4 +121,32 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Essay {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text
+  prompt    String?  @db.Text
+  version   Int      @default(1)
+  aiAssisted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String?  // Foreign key to User model
+  user      User?    @relation(fields: [userId], references: [id])
+  feedback  EssayFeedback?
+}
+
+model EssayFeedback {
+  id                 String   @id @default(cuid())
+  essayId           String   @unique
+  essay             Essay    @relation(fields: [essayId], references: [id], onDelete: Cascade)
+  overallAssessment String   @db.Text
+  strengths         String[] @db.Text
+  areasForImprovement String[] @db.Text
+  suggestions       String[] @db.Text
+  score            Int
+  plagiarismConcerns String[] @db.Text
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 } 
