@@ -5,58 +5,63 @@ import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
-            <Link href="/" className="text-2xl font-bold text-white">
-              UniPath<span className="text-rose-500">AI</span>
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="md:col-span-1 space-y-6">
+            <Link href="/" className="inline-block">
+              <div className="text-3xl font-bold text-white tracking-tight">
+                UniPath
+                <span className="bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent">
+                  AI
+                </span>
+              </div>
             </Link>
-            <p className="mt-3 text-sm text-gray-400">
+            <p className="text-gray-300 leading-relaxed">
               Your AI-powered college application assistant. Navigate your
               journey with confidence.
             </p>
-            <div className="mt-6 flex space-x-4">
+            <div className="flex space-x-5">
               <a
                 href="#"
-                className="text-gray-400 hover:text-gray-300 transition-colors"
+                className="text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-200"
                 aria-label="Facebook"
               >
-                <Facebook className="h-5 w-5" />
+                <Facebook className="h-6 w-6" />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-gray-300 transition-colors"
+                className="text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-200"
                 aria-label="Twitter"
               >
-                <Twitter className="h-5 w-5" />
+                <Twitter className="h-6 w-6" />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-gray-300 transition-colors"
+                className="text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-200"
                 aria-label="Instagram"
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram className="h-6 w-6" />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-gray-300 transition-colors"
+                className="text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-200"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="h-6 w-6" />
               </a>
             </div>
           </div>
-          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8 md:pl-12 border-l border-gray-700/50">
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-200">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">
                 Product
               </h3>
-              <ul className="mt-4 space-y-2">
+              <ul className="space-y-4">
                 <li>
                   <Link
                     href="/features"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Features
                   </Link>
@@ -64,7 +69,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/pricing"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Pricing
                   </Link>
@@ -72,7 +77,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/testimonials"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Testimonials
                   </Link>
@@ -80,7 +85,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/faq"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     FAQ
                   </Link>
@@ -88,14 +93,14 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-200">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">
                 Company
               </h3>
-              <ul className="mt-4 space-y-2">
+              <ul className="space-y-4">
                 <li>
                   <Link
                     href="/about"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     About
                   </Link>
@@ -103,7 +108,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/careers"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Careers
                   </Link>
@@ -111,7 +116,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/contact"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Contact
                   </Link>
@@ -119,14 +124,14 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-200">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">
                 Legal
               </h3>
-              <ul className="mt-4 space-y-2">
+              <ul className="space-y-4">
                 <li>
                   <Link
                     href="/privacy"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Privacy
                   </Link>
@@ -134,7 +139,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/terms"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Terms
                   </Link>
@@ -142,7 +147,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/cookies"
-                    className="text-sm text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     Cookies
                   </Link>
@@ -151,14 +156,17 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} UniPathAI. All rights reserved.
-          </p>
-          <div className="mt-4 md:mt-0">
-            <p className="text-xs text-gray-400">
-              Made with ❤️ for students worldwide
+        <div className="mt-16 pt-8 border-t border-gray-700/50">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-sm text-gray-400">
+              &copy; {new Date().getFullYear()} UniPathAI. All rights reserved.
             </p>
+            <div className="flex items-center space-x-2">
+              <span className="text-rose-500">❤️</span>
+              <p className="text-sm text-gray-400">
+                Made with love for students worldwide
+              </p>
+            </div>
           </div>
         </div>
       </div>

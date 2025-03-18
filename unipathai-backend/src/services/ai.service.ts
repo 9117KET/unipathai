@@ -27,10 +27,7 @@ const model = new ChatOpenAI({
 });
 
 // Rate limiter: 10 requests per minute
-const limiter = new RateLimiter({
-  tokensPerInterval: 10,
-  interval: "minute",
-});
+const limiter = new RateLimiter(10, "minute", false);
 
 // Output parser for structured essay feedback
 const essayFeedbackParser = StructuredOutputParser.fromZodSchema(

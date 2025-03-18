@@ -131,7 +131,7 @@ export default function DashboardLayout({
                   </span>
                 )}
               </div>
-              <Button
+              <Button 
                 variant="outline"
                 size="sm"
                 className="flex items-center"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -36,7 +36,8 @@ type ProfessionalRegisterFormValues = z.infer<
   typeof professionalRegisterSchema
 >;
 
-export default function ProfessionalRegisterPage() {
+// Client component that uses useSearchParams
+function ProfessionalRegisterForm() {
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -66,12 +67,7 @@ export default function ProfessionalRegisterPage() {
       organization: "",
       position: "",
       message: "",
-      role:
-        roleFromUrl &&
-        (roleFromUrl === UserRole.COUNSELOR ||
-          roleFromUrl === UserRole.UNIVERSITY)
-          ? roleFromUrl
-          : undefined,
+      role: roleFromUrl || undefined,
     },
   });
 
@@ -130,12 +126,12 @@ export default function ProfessionalRegisterPage() {
 
   if (isSubmitted) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-lg border border-indigo-100">
+      <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="w-full max-w-md space-y-8 rounded-2xl bg-white/80 backdrop-blur-sm p-8 shadow-xl border border-indigo-100/50">
           <div className="text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-emerald-500 shadow-lg">
               <svg
-                className="h-6 w-6 text-green-600"
+                className="h-6 w-6 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -149,10 +145,10 @@ export default function ProfessionalRegisterPage() {
                 />
               </svg>
             </div>
-            <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="mt-6 text-3xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Application Submitted!
             </h2>
-            <p className="mt-2 text-base text-gray-500">
+            <p className="mt-2 text-base text-gray-600">
               Thank you for your interest in becoming a professional on
               UniPathAI. Our team will review your application and get back to
               you soon.
@@ -160,10 +156,15 @@ export default function ProfessionalRegisterPage() {
           </div>
           <div className="mt-6 flex flex-col space-y-3">
             <Link href="/" passHref>
-              <Button className="w-full">Back to Homepage</Button>
+              <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200">
+                Back to Homepage
+              </Button>
             </Link>
             <Link href="/login" passHref>
-              <Button variant="outline" className="w-full">
+              <Button
+                variant="outline"
+                className="w-full border-2 hover:bg-indigo-50 transition-colors duration-200"
+              >
                 Sign In
               </Button>
             </Link>
@@ -175,17 +176,17 @@ export default function ProfessionalRegisterPage() {
 
   if (isAuthenticated === undefined) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-lg border border-indigo-100">
+    <div className="flex min-h-screen flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <div className="w-full max-w-md space-y-8 rounded-2xl bg-white/80 backdrop-blur-sm p-8 shadow-xl border border-indigo-100/50">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Professional Registration
           </h2>
           <p className="mt-2 text-sm text-gray-600">
@@ -195,7 +196,7 @@ export default function ProfessionalRegisterPage() {
 
         <Link
           href="/register"
-          className="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500"
+          className="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200"
         >
           <ArrowLeft className="mr-1 h-4 w-4" />
           Back to regular registration
@@ -218,9 +219,11 @@ export default function ProfessionalRegisterPage() {
                 type="text"
                 autoComplete="name"
                 {...register("name")}
-                className={
-                  errors.name ? "border-red-300 focus-visible:ring-red-500" : ""
-                }
+                className={`${
+                  errors.name
+                    ? "border-red-300 focus-visible:ring-red-500"
+                    : "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                } shadow-sm transition-all duration-200`}
               />
               {errors.name && (
                 <p className="mt-1 text-sm text-red-600">
@@ -243,11 +246,11 @@ export default function ProfessionalRegisterPage() {
                 type="email"
                 autoComplete="email"
                 {...register("email")}
-                className={
+                className={`${
                   errors.email
                     ? "border-red-300 focus-visible:ring-red-500"
-                    : ""
-                }
+                    : "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                } shadow-sm transition-all duration-200`}
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">
@@ -274,7 +277,7 @@ export default function ProfessionalRegisterPage() {
                   )
                 }
               >
-                <SelectTrigger>
+                <SelectTrigger className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm transition-all duration-200">
                   <SelectValue placeholder="Select your professional role" />
                 </SelectTrigger>
                 <SelectContent>
@@ -304,11 +307,11 @@ export default function ProfessionalRegisterPage() {
                 id="organization"
                 type="text"
                 {...register("organization")}
-                className={
+                className={`${
                   errors.organization
                     ? "border-red-300 focus-visible:ring-red-500"
-                    : ""
-                }
+                    : "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                } shadow-sm transition-all duration-200`}
               />
               {errors.organization && (
                 <p className="mt-1 text-sm text-red-600">
@@ -330,11 +333,11 @@ export default function ProfessionalRegisterPage() {
                 id="position"
                 type="text"
                 {...register("position")}
-                className={
+                className={`${
                   errors.position
                     ? "border-red-300 focus-visible:ring-red-500"
-                    : ""
-                }
+                    : "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                } shadow-sm transition-all duration-200`}
               />
               {errors.position && (
                 <p className="mt-1 text-sm text-red-600">
@@ -357,11 +360,11 @@ export default function ProfessionalRegisterPage() {
                 {...register("message")}
                 rows={4}
                 placeholder="Tell us more about yourself and how you plan to use UniPathAI"
-                className={
+                className={`${
                   errors.message
                     ? "border-red-300 focus-visible:ring-red-500"
-                    : ""
-                }
+                    : "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                } shadow-sm transition-all duration-200`}
               />
               {errors.message && (
                 <p className="mt-1 text-sm text-red-600">
@@ -372,7 +375,11 @@ export default function ProfessionalRegisterPage() {
           </div>
 
           <div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200"
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}
@@ -382,5 +389,14 @@ export default function ProfessionalRegisterPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+// Main page component with Suspense boundary
+export default function ProfessionalRegisterPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProfessionalRegisterForm />
+    </Suspense>
   );
 }

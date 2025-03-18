@@ -41,7 +41,7 @@ function FeatureItem({ title, description, icon, variant }: FeatureItemProps) {
             }
       }
     >
-      <div className="flex items-center gap-4">
+      <div className="flex ite  ms-center gap-4">
         <div className="text-current">{icon}</div>
         <div>
           <h3 className="text-xl font-semibold text-current">{title}</h3>

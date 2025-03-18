@@ -14,7 +14,6 @@ import { authenticate, authorize } from "../middlewares/auth.middleware";
 const router = express.Router();
 
 // Get all users (admin only)
-// @ts-expect-error - Express route handler return type issue
 router.get(
   "/",
   authenticate,
@@ -43,11 +42,11 @@ router.get(
 );
 
 // Get user profile
-// @ts-expect-error - Express route handler return type issue
 router.get("/profile", authenticate, async (req: Request, res: Response) => {
   try {
     if (!req.user) {
-      return res.status(401).json({ message: "User not authenticated" });
+      res.status(401).json({ message: "User not authenticated" });
+      return;
     }
 
     const profile = await prisma.profile.findUnique({
@@ -55,7 +54,8 @@ router.get("/profile", authenticate, async (req: Request, res: Response) => {
     });
 
     if (!profile) {
-      return res.status(404).json({ message: "Profile not found" });
+      res.status(404).json({ message: "Profile not found" });
+      return;
     }
 
     res.status(200).json(profile);
@@ -66,11 +66,11 @@ router.get("/profile", authenticate, async (req: Request, res: Response) => {
 });
 
 // Create or update user profile
-// @ts-expect-error - Express route handler return type issue
 router.post("/profile", authenticate, async (req: Request, res: Response) => {
   try {
     if (!req.user) {
-      return res.status(401).json({ message: "User not authenticated" });
+      res.status(401).json({ message: "User not authenticated" });
+      return;
     }
 
     const { bio, location, educationLevel, interests, testScores } = req.body;
@@ -131,7 +131,6 @@ router.post("/profile", authenticate, async (req: Request, res: Response) => {
 });
 
 // Get mentors (for students)
-// @ts-expect-error - Express route handler return type issue
 router.get(
   "/mentors",
   authenticate,
@@ -139,7 +138,8 @@ router.get(
   async (req: Request, res: Response) => {
     try {
       if (!req.user) {
-        return res.status(401).json({ message: "User not authenticated" });
+        res.status(401).json({ message: "User not authenticated" });
+        return;
       }
 
       // Get all active mentor relationships for this student
@@ -173,7 +173,6 @@ router.get(
 );
 
 // Get students (for counselors)
-// @ts-expect-error - Express route handler return type issue
 router.get(
   "/students",
   authenticate,
@@ -181,7 +180,8 @@ router.get(
   async (req: Request, res: Response) => {
     try {
       if (!req.user) {
-        return res.status(401).json({ message: "User not authenticated" });
+        res.status(401).json({ message: "User not authenticated" });
+        return;
       }
 
       // Get all active mentor relationships for this counselor
