@@ -13,8 +13,13 @@ import {
   onSnapshot,
   Timestamp,
   serverTimestamp,
+  DocumentData,
+  Query,
 } from "firebase/firestore";
 import { firestore } from "./firebase-config";
+
+// Define a type for firestore document data
+export type FirestoreData = DocumentData;
 
 /**
  * Create a document in a collection
@@ -24,7 +29,7 @@ import { firestore } from "./firebase-config";
  */
 export async function createDocument(
   collectionName: string,
-  data: any
+  data: FirestoreData
 ): Promise<string> {
   try {
     const docRef = await addDoc(collection(firestore, collectionName), {
@@ -48,7 +53,7 @@ export async function createDocument(
 export async function getDocument(
   collectionName: string,
   documentId: string
-): Promise<any> {
+): Promise<FirestoreData | null> {
   try {
     const docRef = doc(firestore, collectionName, documentId);
     const docSnap = await getDoc(docRef);
@@ -131,7 +136,11 @@ export async function queryDocuments(
   limitCount?: number
 ): Promise<any[]> {
   try {
-    let q = collection(firestore, collectionName);
+    // Get collection reference
+    const collectionRef = collection(firestore, collectionName);
+
+    // Start with the collection reference as the base query
+    let q: Query<DocumentData> = collectionRef;
 
     // Apply query conditions
     if (conditions.length > 0) {
@@ -160,55 +169,28 @@ export async function queryDocuments(
 }
 
 /**
- * Subscribe to realtime updates on a document
+ * Subscribe to real-time updates for a collection with optional filtering
  * @param collectionName - Name of the collection
- * @param documentId - Document ID
- * @param callback - Callback function to handle updates
+ * @param onNext - Callback function for data updates
+ * @param conditions - Optional array of conditions [field, operator, value]
+ * @param sortField - Optional field to sort by
+ * @param sortDirection - Optional sort direction ('asc' or 'desc')
+ * @param limitCount - Optional limit on number of documents
  * @returns Unsubscribe function
  */
-export function subscribeToDocument(
+export function subscribeToCollection(
   collectionName: string,
-  documentId: string,
-  callback: (data: any) => void
-): () => void {
-  const docRef = doc(firestore, collectionName, documentId);
-  return onSnapshot(
-    docRef,
-    (doc) => {
-      if (doc.exists()) {
-        callback({ id: doc.id, ...doc.data() });
-      } else {
-        callback(null);
-      }
-    },
-    (error) => {
-      console.error(
-        `Error subscribing to document ${documentId} in ${collectionName}:`,
-        error
-      );
-    }
-  );
-}
-
-/**
- * Subscribe to realtime updates on a query
- * @param collectionName - Name of the collection
- * @param conditions - Array of query conditions [field, operator, value]
- * @param callback - Callback function to handle updates
- * @param sortField - Field to sort by (optional)
- * @param sortDirection - Sort direction (optional)
- * @param limitCount - Limit the number of returned documents (optional)
- * @returns Unsubscribe function
- */
-export function subscribeToQuery(
-  collectionName: string,
-  conditions: [string, string, any][],
-  callback: (data: any[]) => void,
+  onNext: (data: FirestoreData[]) => void,
+  conditions: [string, string, any][] = [],
   sortField?: string,
   sortDirection?: "asc" | "desc",
   limitCount?: number
 ): () => void {
-  let q = collection(firestore, collectionName);
+  // Get collection reference
+  const collectionRef = collection(firestore, collectionName);
+
+  // Start with the collection reference as the base query
+  let q: Query<DocumentData> = collectionRef;
 
   // Apply query conditions
   if (conditions.length > 0) {
@@ -235,10 +217,13 @@ export function subscribeToQuery(
         id: doc.id,
         ...doc.data(),
       }));
-      callback(documents);
+      onNext(documents);
     },
     (error) => {
-      console.error(`Error subscribing to query in ${collectionName}:`, error);
+      console.error(
+        `Error subscribing to collection ${collectionName}:`,
+        error
+      );
     }
   );
 }

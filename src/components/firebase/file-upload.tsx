@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { uploadFile, generateUniqueFilename } from "@/lib/firebase/storage";
+import { generateUniqueFilename } from "@/lib/firebase/storage";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase/firebase-config";
 import { useToast } from "@/hooks/use-toast";

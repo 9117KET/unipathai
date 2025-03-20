@@ -15,31 +15,38 @@ export default function Home() {
         <section className="relative py-24 sm:py-32 lg:py-36">
           <GradientBackground
             accentPositions={{
-              accent1: { top: "2%", left: "25%" },
+              accent1: { top: "5%", left: "20%" },
               accent2: { bottom: "5%", right: "15%" },
-              accent3: { top: "40%", left: "10%" },
+              accent3: { top: "40%", left: "5%" },
             }}
           >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24 items-center">
                 <div className="max-w-xl">
                   <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                    <span className="block mb-2">Navigate Your</span>
-                    <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent pb-2 leading-[1.3] mb-1">
+                    <span className="block text-gray-900 dark:text-white">
+                      Your AI-Powered
+                    </span>
+                    <span className="block text-indigo-600 dark:text-indigo-400 leading-[1.3] mb-3">
                       College Journey
                     </span>
+                    <span className="block text-gray-900 dark:text-white">
+                      Starts Here
+                    </span>
                   </h1>
-                  <p className="mt-8 text-lg leading-7 opacity-90 max-w-md">
-                    AI-powered assistance for college applications, essays, and
-                    finding your perfect college match.
+                  <p className="mt-6 text-lg leading-7 text-gray-700 dark:text-gray-300 max-w-lg">
+                    Navigate your college application process with confidence
+                    using our AI-powered platform. Get personalized essay
+                    feedback, smart college matches, and comprehensive
+                    application tracking.
                   </p>
-                  <div className="mt-12 flex flex-col sm:flex-row gap-5">
+                  <div className="mt-10 flex flex-col sm:flex-row gap-5">
                     <Link href="/register">
                       <Button
                         size="lg"
-                        className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 w-full sm:w-auto shadow-md"
+                        className="bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto shadow-md"
                       >
-                        Get Started Free
+                        Start Free Trial
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </Link>
@@ -47,18 +54,201 @@ export default function Home() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="border-indigo-400/30 text-indigo-400 hover:bg-indigo-950/30 w-full sm:w-auto"
+                        className="border-indigo-400/30 text-indigo-600 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-950/30 w-full sm:w-auto"
                       >
                         Explore Features
                       </Button>
                     </Link>
                   </div>
+                  <div className="mt-8">
+                    <p className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                      <span className="flex mr-2">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="mr-1"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="11"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="mr-1 -ml-3"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="11"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="mr-1 -ml-3"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="11"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="mr-1 -ml-3"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="11"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="-ml-3"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="11"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                      </span>
+                      <span className="font-semibold">5,000+</span> students
+                      trust UniPathAI
+                    </p>
+                  </div>
                 </div>
 
-                {/* New feature cards that match the image */}
+                {/* Feature cards that match the image */}
                 <div className="relative lg:ml-auto">
-                  <div className="transform lg:translate-y-6 lg:scale-110 transition-transform duration-500">
-                    <FeatureCards />
+                  <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-lg overflow-hidden">
+                    <div className="px-5 py-4">
+                      <div className="inline-block px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-medium mb-4">
+                        AI-Powered
+                      </div>
+
+                      <div className="space-y-5">
+                        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg flex items-start">
+                          <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-800/30 p-2 rounded-md mr-4">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="text-blue-600 dark:text-blue-400"
+                            >
+                              <path d="M12 3c.53 0 1.04.21 1.41.59.38.37.59.88.59 1.41 0 .53-.21 1.04-.59 1.41-.37.38-.88.59-1.41.59-.53 0-1.04-.21-1.41-.59C10.21 6.04 10 5.53 10 5c0-.53.21-1.04.59-1.41C10.96 3.21 11.47 3 12 3z"></path>
+                              <path d="M7.59 8.59C7.21 8.21 7 7.7 7 7.17c0-.53.21-1.04.59-1.42.37-.38.88-.58 1.41-.58.53 0 1.04.2 1.41.58.38.38.59.89.59 1.42 0 .53-.21 1.04-.59 1.42-.37.38-.88.58-1.41.58-.53 0-1.04-.2-1.41-.58z"></path>
+                              <path d="M16.41 8.59c-.38.38-.89.58-1.42.58-.53 0-1.04-.2-1.41-.58a1.993 1.993 0 0 1 0-2.83c.37-.38.88-.58 1.41-.58.53 0 1.04.2 1.42.58.37.38.58.89.58 1.42 0 .52-.21 1.03-.58 1.41z"></path>
+                              <path d="M12 19c-.53 0-1.04-.21-1.41-.59-.38-.37-.59-.88-.59-1.41 0-.53.21-1.04.59-1.41.37-.38.88-.59 1.41-.59.53 0 1.04.21 1.41.59.38.37.59.88.59 1.41 0 .53-.21 1.04-.59 1.41-.37.38-.88.59-1.41.59z"></path>
+                              <path d="M7.59 15.41c.38-.38.58-.89.58-1.42 0-.53-.2-1.04-.58-1.41a1.993 1.993 0 0 0-2.83 0c-.38.37-.58.88-.58 1.41 0 .53.2 1.04.58 1.42.37.38.88.58 1.41.58.53 0 1.04-.2 1.42-.58z"></path>
+                              <path d="M19.83 12.58c0-.53-.2-1.04-.58-1.41-.38-.38-.89-.58-1.42-.58-.53 0-1.04.2-1.41.58-.38.37-.59.88-.59 1.41 0 .53.21 1.04.59 1.42.37.38.88.58 1.41.58.53 0 1.04-.2 1.42-.58.38-.38.58-.89.58-1.42z"></path>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 className="font-medium text-blue-700 dark:text-blue-400">
+                              AI Essay Assistant
+                            </h3>
+                            <p className="text-sm text-blue-600/80 dark:text-blue-300/80">
+                              Get real-time feedback on your essays
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg flex items-start">
+                          <div className="flex-shrink-0 bg-green-100 dark:bg-green-800/30 p-2 rounded-md mr-4">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="text-green-600 dark:text-green-400"
+                            >
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <circle cx="12" cy="12" r="6"></circle>
+                              <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 className="font-medium text-green-700 dark:text-green-400">
+                              Smart College Matching
+                            </h3>
+                            <p className="text-sm text-green-600/80 dark:text-green-300/80">
+                              Find your perfect college fit
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg flex items-start">
+                          <div className="flex-shrink-0 bg-red-100 dark:bg-red-800/30 p-2 rounded-md mr-4">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="text-red-600 dark:text-red-400"
+                            >
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                          </div>
+                          <div>
+                            <h3 className="font-medium text-red-700 dark:text-red-400">
+                              Application Tracking
+                            </h3>
+                            <p className="text-sm text-red-600/80 dark:text-red-300/80">
+                              Stay organized and never miss deadlines
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
