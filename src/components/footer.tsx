@@ -92,6 +92,7 @@ export function Footer() {
                 </li>
               </ul>
             </div>
+
             <div>
               <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">
                 Company
@@ -103,6 +104,14 @@ export function Footer() {
                     className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
                   >
                     About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/blog"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center"
+                  >
+                    Blog
                   </Link>
                 </li>
                 <li>
@@ -123,6 +132,7 @@ export function Footer() {
                 </li>
               </ul>
             </div>
+
             <div>
               <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6">
                 Legal
@@ -156,17 +166,15 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-16 pt-8 border-t border-gray-700/50">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-gray-400">
+
+        <div className="mt-16 pt-8 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
               &copy; {new Date().getFullYear()} UniPathAI. All rights reserved.
             </p>
-            <div className="flex items-center space-x-2">
-              <span className="text-rose-500">❤️</span>
-              <p className="text-sm text-gray-400">
-                Made with love for students worldwide
-              </p>
-            </div>
+            <p className="text-gray-400 text-sm mt-4 md:mt-0">
+              Developed by KET for students worldwide
+            </p>
           </div>
         </div>
       </div>

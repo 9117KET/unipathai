@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
+<<<<<<< HEAD
+=======
 import {
   Select,
   SelectContent,
@@ -21,6 +23,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { UserRole } from "@/types/user";
 import { useRouter } from "next/navigation";
+>>>>>>> dce7acfe1f0c6902150dca701077d803a98d09ea
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
@@ -82,6 +85,17 @@ export function AuthForm(props: AuthFormProps) {
 
   const isLogin = props.type === "login";
   const router = useRouter();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setGoogleLoading(true);
+      await signIn("google", { callbackUrl: "/dashboard" });
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
 
   const handleGoogleSignIn = async () => {
     try {
