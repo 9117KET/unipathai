@@ -4,9 +4,28 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useSession, signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // TODO: session data is currently unused but may be needed for future features (e.g. displaying user info)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data: _, status } = useSession();
+  const isAuthenticated = status === "authenticated";
+  const pathname = usePathname();
+
+  // Don't show the navbar on dashboard pages
+  const isDashboard = pathname.startsWith("/dashboard");
+
+  // If on dashboard, don't render this navbar at all
+  if (isDashboard) {
+    return null;
+  }
+
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: "/" });
+  };
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-indigo-50 shadow-sm">
@@ -38,16 +57,35 @@ export function Navbar() {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/login">
-              <Button variant="ghost" className="text-sm">
-                Sign In
-              </Button>
-            </Link>
-            <Link href="/register">
-              <Button className="text-sm shadow-lg shadow-indigo-100">
-                Get Started
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link href="/dashboard">
+                  <Button variant="ghost" className="text-sm">
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button
+                  variant="outline"
+                  className="text-sm"
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button variant="ghost" className="text-sm">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button className="text-sm shadow-lg shadow-indigo-100">
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
           <div className="md:hidden flex items-center">
             <button
@@ -91,24 +129,51 @@ export function Navbar() {
               About
             </Link>
             <div className="pt-4 pb-3 border-t border-indigo-100">
-              <div className="flex items-center px-3">
-                <Link
-                  href="/login"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 w-full"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
-              </div>
-              <div className="mt-3 px-3">
-                <Link
-                  href="/register"
-                  className="block w-full px-3 py-2 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 text-center"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Get Started
-                </Link>
-              </div>
+              {isAuthenticated ? (
+                <>
+                  <div className="flex items-center px-3">
+                    <Link
+                      href="/dashboard"
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 w-full"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  </div>
+                  <div className="mt-3 px-3">
+                    <button
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        handleSignOut();
+                      }}
+                      className="block w-full px-3 py-2 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 text-center"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center px-3">
+                    <Link
+                      href="/login"
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 w-full"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                  </div>
+                  <div className="mt-3 px-3">
+                    <Link
+                      href="/register"
+                      className="block w-full px-3 py-2 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 text-center"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

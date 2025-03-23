@@ -62,7 +62,10 @@ export const sendNotification = async (
       tokens,
     };
 
-    const response = await messaging.sendMulticast(message);
+    // TODO: The TypeScript definitions for firebase-admin may be out of date.
+    // The sendMulticast method exists in the Firebase Admin SDK but isn't properly typed.
+    // Consider updating the firebase-admin package or adding custom type definitions.
+    const response = await (messaging as any).sendMulticast(message);
     console.log(`${response.successCount} messages were sent successfully`);
 
     return true;

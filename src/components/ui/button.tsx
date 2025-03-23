@@ -1,39 +1,32 @@
-"use client";
-
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-uni-primary text-white hover:bg-uni-primary/90",
-        destructive: "bg-uni-error text-white hover:bg-uni-error/90",
+        default:
+          "bg-gradient-to-r from-uni-primary to-uni-accent text-white shadow-lg hover:shadow-xl hover:from-uni-primary/90 hover:to-uni-accent/90",
+        destructive:
+          "bg-gradient-to-r from-uni-error to-rose-500 text-white shadow-lg hover:shadow-xl hover:from-uni-error/90 hover:to-rose-500/90",
         outline:
-          "border border-uni-primary bg-transparent text-uni-primary hover:bg-uni-primary/10",
-        secondary: "bg-uni-accent text-white hover:bg-uni-accent/90",
-        ghost:
-          "hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-50",
+          "border-2 border-uni-primary bg-transparent text-uni-primary shadow-md hover:shadow-lg hover:bg-uni-primary hover:text-white",
+        secondary:
+          "bg-gradient-to-r from-uni-accent to-uni-primary text-white shadow-lg hover:shadow-xl hover:from-uni-accent/90 hover:to-uni-primary/90",
+        ghost: "hover:bg-accent/10 hover:text-accent-foreground",
         link: "text-uni-primary underline-offset-4 hover:underline",
-        premium: "bg-uni-gold text-white hover:bg-uni-gold/90",
-        gradient:
-          "bg-gradient-to-r from-uni-primary to-uni-accent text-white hover:from-uni-accent hover:to-uni-primary",
-        gradientGold:
-          "bg-gradient-to-r from-uni-gold to-uni-warning text-white hover:from-uni-warning hover:to-uni-gold",
-        gradientSuccess:
-          "bg-gradient-to-r from-uni-success to-teal-500 text-white hover:from-teal-500 hover:to-uni-success",
-        gradientOutline:
-          "border border-transparent bg-gradient-to-r from-uni-primary to-uni-accent bg-clip-text text-transparent hover:from-uni-accent hover:to-uni-primary",
+        glass:
+          "glass-card text-uni-primary hover:text-white hover:bg-gradient-to-r hover:from-uni-primary/90 hover:to-uni-accent/90",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-        full: "w-full py-2.5",
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
       },
     },
     defaultVariants: {

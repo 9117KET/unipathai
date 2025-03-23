@@ -11,6 +11,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
+<<<<<<< HEAD
+=======
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { UserRole } from "@/types/user";
+import { useRouter } from "next/navigation";
+>>>>>>> dce7acfe1f0c6902150dca701077d803a98d09ea
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
@@ -19,6 +32,7 @@ const loginSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters" }),
 });
 
+// Define all possible roles for the schema
 const registerSchema = loginSchema
   .extend({
     name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -26,6 +40,15 @@ const registerSchema = loginSchema
       .string()
       .min(8, { message: "Password must be at least 8 characters" }),
     confirmPassword: z.string(),
+    // Include all roles in the schema to allow for type checking
+    role: z
+      .enum([
+        UserRole.STUDENT,
+        UserRole.PARENT,
+        UserRole.COUNSELOR,
+        UserRole.UNIVERSITY,
+      ])
+      .default(UserRole.STUDENT),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -35,23 +58,22 @@ const registerSchema = loginSchema
 type LoginFormValues = z.infer<typeof loginSchema>;
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
-export { type LoginFormValues, type RegisterFormValues };
+export type { LoginFormValues, RegisterFormValues };
 
-interface LoginFormProps {
-  type: "login";
-  onSubmit: (values: LoginFormValues) => Promise<void>;
-  className?: string;
-  isLoading?: boolean;
-}
-
-interface RegisterFormProps {
-  type: "register";
-  onSubmit: (values: RegisterFormValues) => Promise<void>;
-  className?: string;
-  isLoading?: boolean;
-}
-
-type AuthFormProps = LoginFormProps | RegisterFormProps;
+// Update the AuthFormProps to include all possible roles in the register form
+type AuthFormProps =
+  | {
+      type: "login";
+      onSubmit: (values: LoginFormValues) => Promise<void>;
+      className?: string;
+      isLoading?: boolean;
+    }
+  | {
+      type: "register";
+      onSubmit: (values: RegisterFormValues) => Promise<void>;
+      className?: string;
+      isLoading?: boolean;
+    };
 
 export function AuthForm(props: AuthFormProps) {
   const externalLoading = "isLoading" in props ? props.isLoading : undefined;
@@ -62,6 +84,18 @@ export function AuthForm(props: AuthFormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const isLogin = props.type === "login";
+  const router = useRouter();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setGoogleLoading(true);
+      await signIn("google", { callbackUrl: "/dashboard" });
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
 
   const handleGoogleSignIn = async () => {
     try {
@@ -184,20 +218,66 @@ export function AuthForm(props: AuthFormProps) {
   };
 
   const RegisterForm = () => {
+    // User-friendly role options for display
+    const roleOptions = [
+      { value: UserRole.STUDENT, label: "Student" },
+      { value: UserRole.PARENT, label: "Parent" },
+      { value: UserRole.COUNSELOR, label: "Counselor" },
+      { value: UserRole.UNIVERSITY, label: "University Representative" },
+    ];
+
+    const [selectedRole, setSelectedRole] = useState<UserRole>(
+      UserRole.STUDENT
+    );
+
+    // Define professional roles for redirecting users
+    const professionalRoles = [UserRole.COUNSELOR, UserRole.UNIVERSITY];
+
+    // Check if the role is a professional role
+    const isProfessionalRole = professionalRoles.includes(selectedRole);
+
     const {
       register,
       handleSubmit,
       formState: { errors },
     } = useForm<RegisterFormValues>({
       resolver: zodResolver(registerSchema),
-      defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
+      defaultValues: {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        role: UserRole.STUDENT,
+      },
     });
 
+    const handleRoleChange = (value: string) => {
+      const role = value as UserRole;
+      setSelectedRole(role);
+
+      // If a professional role is selected, redirect to the professional application page
+      if (professionalRoles.includes(role)) {
+        router.push(`/register/professional?role=${role}`);
+      }
+    };
+
     const handleFormSubmit = async (data: RegisterFormValues) => {
+      // If a professional role is selected, redirect instead of submitting
+      if (isProfessionalRole) {
+        router.push(`/register/professional?role=${selectedRole}`);
+        return;
+      }
+
+      // Otherwise, submit the form for standard roles
       setInternalLoading(true);
       try {
         if (!isLogin && "type" in props && props.type === "register") {
-          await props.onSubmit(data);
+          // Make sure we're only submitting standard role data
+          await props.onSubmit({
+            ...data,
+            // TODO: In the future, implement proper role validation to ensure only valid roles are submitted
+            role: data.role,
+          });
         }
       } catch (error) {
         console.error(error);
@@ -213,7 +293,7 @@ export function AuthForm(props: AuthFormProps) {
             htmlFor="name"
             className="block text-sm font-medium text-gray-700"
           >
-            Name
+            Full name
           </label>
           <div className="mt-1">
             <Input
@@ -299,9 +379,9 @@ export function AuthForm(props: AuthFormProps) {
             htmlFor="confirmPassword"
             className="block text-sm font-medium text-gray-700"
           >
-            Confirm Password
+            Confirm password
           </label>
-          <div className="mt-1">
+          <div className="mt-1 relative">
             <Input
               id="confirmPassword"
               type={showPassword ? "text" : "password"}
@@ -313,10 +393,47 @@ export function AuthForm(props: AuthFormProps) {
                   : ""
               }
             />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeOff className="h-4 w-4" aria-hidden="true" />
+              ) : (
+                <Eye className="h-4 w-4" aria-hidden="true" />
+              )}
+            </button>
             {errors.confirmPassword && (
               <p className="mt-1 text-sm text-red-600">
                 {errors.confirmPassword.message}
               </p>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <Label
+            htmlFor="role"
+            className="block text-sm font-medium text-gray-700"
+          >
+            I am a
+          </Label>
+          <div className="mt-1">
+            <Select value={selectedRole} onValueChange={handleRoleChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select your role" />
+              </SelectTrigger>
+              <SelectContent>
+                {roleOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {errors.role && (
+              <p className="mt-1 text-sm text-red-600">{errors.role.message}</p>
             )}
           </div>
         </div>

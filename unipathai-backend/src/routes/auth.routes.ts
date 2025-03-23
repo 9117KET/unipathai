@@ -1,13 +1,20 @@
 import express from "express";
+import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
 import { prisma } from "../index";
 import { authenticate } from "../middlewares/auth.middleware";
+
+// NOTE: The previous TODO about Express type mismatch appears to be resolved.
+// The '@ts-expect-error' directives are no longer needed as TypeScript is not
+// detecting type incompatibility errors. If type errors reappear, consider:
+// 1. Ensuring @types/express version matches Express version
+// 2. Or upgrading Express to match @types/express
 
 const router = express.Router();
 
 // Register a new user
-router.post("/register", async (req, res) => {
+router.post("/register", async (req: Request, res: Response) => {
   try {
     const { email, password, firstName, lastName, role } = req.body;
 
@@ -51,7 +58,7 @@ router.post("/register", async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       secret,
-      { expiresIn: process.env.JWT_EXPIRY || "7d" }
+      { expiresIn: process.env.JWT_EXPIRY || "7d" } as SignOptions
     );
 
     // Return user info and token (excluding password)
@@ -74,7 +81,7 @@ router.post("/register", async (req, res) => {
 });
 
 // Login user
-router.post("/login", async (req, res) => {
+router.post("/login", async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
@@ -110,7 +117,7 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       secret,
-      { expiresIn: process.env.JWT_EXPIRY || "7d" }
+      { expiresIn: process.env.JWT_EXPIRY || "7d" } as SignOptions
     );
 
     // Return user info and token (excluding password)
@@ -133,11 +140,14 @@ router.post("/login", async (req, res) => {
 });
 
 // Get current user
-router.get("/me", authenticate, async (req, res) => {
+router.get("/me", authenticate, async (req: Request, res: Response) => {
   try {
     if (!req.user) {
       return res.status(401).json({ message: "User not authenticated" });
     }
+
+    // The req.user type is properly defined in auth.middleware.ts via declaration merging
+    // with the Express namespace, so we can safely access its properties
 
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },

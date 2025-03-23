@@ -3,15 +3,13 @@ import jwt from "jsonwebtoken";
 import { prisma } from "../index";
 
 // Extend Express Request interface to include user info
-declare global {
-  namespace Express {
-    interface Request {
-      user?: {
-        id: string;
-        email: string;
-        role: string;
-      };
-    }
+declare module "express" {
+  interface Request {
+    user?: {
+      id: string;
+      email: string;
+      role: string;
+    };
   }
 }
 

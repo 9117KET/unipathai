@@ -19,6 +19,13 @@ enum UserRole {
   ADMIN
 }
 
+// Define status for professional requests
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 // User model for authentication and profile
 model User {
   id            String    @id @default(cuid())
@@ -37,6 +44,7 @@ model User {
   
   // Firebase tokens for notifications
   notificationTokens UserNotificationToken[]
+  essays        Essay[]   // Add relation to essays
 }
 
 // Store Firebase Cloud Messaging tokens for push notifications
@@ -49,6 +57,34 @@ model UserNotificationToken {
   
   // Relationship to user
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Professional registration requests
+model ProfessionalRequest {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  role         UserRole
+  organization String
+  position     String
+  message      String        @default("") @db.Text
+  status       RequestStatus @default(PENDING)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+// Invitations for professional accounts
+model Invitation {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  email     String
+  name      String
+  role      UserRole
+  metadata  Json      @default("{}")
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 // NextAuth.js Models
@@ -85,4 +121,32 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Essay {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text
+  prompt    String?  @db.Text
+  version   Int      @default(1)
+  aiAssisted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String?  // Foreign key to User model
+  user      User?    @relation(fields: [userId], references: [id])
+  feedback  EssayFeedback?
+}
+
+model EssayFeedback {
+  id                 String   @id @default(cuid())
+  essayId           String   @unique
+  essay             Essay    @relation(fields: [essayId], references: [id], onDelete: Cascade)
+  overallAssessment String   @db.Text
+  strengths         String[] @db.Text
+  areasForImprovement String[] @db.Text
+  suggestions       String[] @db.Text
+  score            Int
+  plagiarismConcerns String[] @db.Text
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 } 

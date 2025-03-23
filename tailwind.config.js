@@ -1,100 +1,114 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        // Brand colors from roadmap document
-        "uni-primary": "#002A5E", // Deep Blue - Trust, reliability, professionalism
-        "uni-gold": "#F9A826", // Soft Gold - Aspiration and premium
-        "uni-white": "#F5F7FA", // Clean White - Background & contrast
-
-        // Supporting colors
-        "uni-accent": "#4361EE", // Accent Blue - Action buttons, links
-        "uni-success": "#2EC4B6", // Success Green - Completions, confirmations
-        "uni-warning": "#FF9F1C", // Warning Orange - Alerts, deadlines
-        "uni-error": "#E63946", // Error Red - Errors, required actions
-
-        // Original extended colors
-        indigo: {
-          950: "#1e1b4b",
+        border: "var(--uni-border)",
+        input: "var(--uni-input)",
+        ring: "var(--uni-ring)",
+        background: "var(--uni-background)",
+        foreground: "var(--uni-foreground)",
+        primary: {
+          DEFAULT: "var(--uni-primary)",
+          foreground: "var(--uni-foreground)",
         },
-        purple: {
-          950: "#3b0764",
+        secondary: {
+          DEFAULT: "var(--uni-accent)",
+          foreground: "var(--uni-foreground)",
         },
-        pink: {
-          950: "#500724",
+        destructive: {
+          DEFAULT: "var(--uni-error)",
+          foreground: "var(--uni-foreground)",
         },
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-      animation: {
-        "gradient-x": "gradient-x 15s ease infinite",
-        "gradient-y": "gradient-y 15s ease infinite",
-        "gradient-xy": "gradient-xy 15s ease infinite",
-        "gradient-x-slow": "gradient-x 25s ease infinite",
-        "gradient-x-fast": "gradient-x 8s ease infinite",
-        float: "float 6s ease-in-out infinite",
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      },
-      keyframes: {
-        "gradient-y": {
-          "0%, 100%": {
-            "background-size": "400% 400%",
-            "background-position": "center top",
-          },
-          "50%": {
-            "background-size": "200% 200%",
-            "background-position": "center center",
-          },
+        muted: {
+          DEFAULT: "var(--uni-muted)",
+          foreground: "var(--uni-muted-foreground)",
         },
-        "gradient-x": {
-          "0%, 100%": {
-            "background-size": "200% 200%",
-            "background-position": "left center",
-          },
-          "50%": {
-            "background-size": "200% 200%",
-            "background-position": "right center",
-          },
+        accent: {
+          DEFAULT: "var(--uni-accent)",
+          foreground: "var(--uni-foreground)",
         },
-        "gradient-xy": {
-          "0%, 100%": {
-            "background-size": "400% 400%",
-            "background-position": "left center",
-          },
-          "50%": {
-            "background-size": "200% 200%",
-            "background-position": "right center",
-          },
+        popover: {
+          DEFAULT: "var(--uni-background)",
+          foreground: "var(--uni-foreground)",
         },
-        float: {
-          "0%, 100%": {
-            transform: "translateY(0px)",
-          },
-          "50%": {
-            transform: "translateY(-20px)",
-          },
+        card: {
+          DEFAULT: "var(--uni-background)",
+          foreground: "var(--uni-foreground)",
+        },
+        uni: {
+          primary: "var(--uni-primary)",
+          accent: "var(--uni-accent)",
+          gold: "var(--uni-gold)",
+          success: "var(--uni-success)",
+          error: "var(--uni-error)",
+          warning: "var(--uni-warning)",
+          info: "var(--uni-info)",
+          background: "var(--uni-background)",
+          foreground: "var(--uni-foreground)",
+          muted: "var(--uni-muted)",
+          "muted-foreground": "var(--uni-muted-foreground)",
+          border: "var(--uni-border)",
+          input: "var(--uni-input)",
+          ring: "var(--uni-ring)",
         },
       },
       borderRadius: {
-        xl: "1rem",
-        "2xl": "1.5rem",
-        "3xl": "2rem",
+        lg: "var(--uni-radius)",
+        md: "calc(var(--uni-radius) - 2px)",
+        sm: "calc(var(--uni-radius) - 4px)",
       },
-      boxShadow: {
-        soft: "0 5px 15px rgba(0, 0, 0, 0.05)",
-        card: "0 10px 30px -5px rgba(0, 0, 0, 0.1)",
-        elevated: "0 20px 40px rgba(0, 0, 0, 0.1)",
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+        gradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        float: {
+          "0%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+          "100%": { transform: "translateY(0px)" },
+        },
+        pulse: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+          "100%": { transform: "scale(1)" },
+        },
+        shine: {
+          "0%": { backgroundPosition: "-100% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        gradient: "gradient 8s ease infinite",
+        float: "float 3s ease-in-out infinite",
+        pulse: "pulse 2s ease-in-out infinite",
+        shine: "shine 3s linear infinite",
       },
     },
   },
-  plugins: [],
+  plugins: [import("tailwindcss-animate")],
 };

@@ -28,130 +28,128 @@ type CardProps = {
   onClick?: () => void;
 };
 
-export const Card = ({
-  variant = "default",
-  size = "md",
-  className,
-  children,
-  hoverEffect = false,
-  onClick,
-  ...props
-}: CardProps & React.HTMLAttributes<HTMLDivElement>) => {
-  return (
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  (
+    {
+      className,
+      variant = "default",
+      size = "md",
+      hoverEffect = true,
+      ...props
+    },
+    ref
+  ) => (
     <div
+      ref={ref}
       className={cn(
-        "rounded-xl",
         variants[variant],
         sizes[size],
-        hoverEffect &&
-          "hover:translate-y-[-4px] hover:shadow-lg transition-all duration-300",
-        onClick && "cursor-pointer",
+        hoverEffect && "hover:shadow-xl hover:bg-white/10",
         className
       )}
-      onClick={onClick}
       {...props}
-    >
-      {children}
-    </div>
-  );
-};
+    />
+  )
+);
+Card.displayName = "Card";
 
 type CardHeaderProps = {
   className?: string;
   children?: React.ReactNode;
 };
 
-export const CardHeader = ({
-  className,
-  children,
-  ...props
-}: CardHeaderProps) => {
-  return (
-    <div className={cn("flex flex-col space-y-1.5", className)} {...props}>
-      {children}
-    </div>
-  );
-};
+const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("flex flex-col space-y-1.5 p-6", className)}
+      {...props}
+    />
+  )
+);
+CardHeader.displayName = "CardHeader";
 
 type CardTitleProps = {
   className?: string;
   children?: React.ReactNode;
 };
 
-export const CardTitle = ({
-  className,
-  children,
-  ...props
-}: CardTitleProps) => {
-  return (
+const CardTitle = React.forwardRef<HTMLParagraphElement, CardTitleProps>(
+  ({ className, ...props }, ref) => (
     <h3
+      ref={ref}
       className={cn(
-        "font-semibold leading-tight tracking-tight text-lg",
+        "text-2xl font-semibold leading-none tracking-tight bg-gradient-to-r from-uni-primary to-uni-accent bg-clip-text text-transparent",
         className
       )}
       {...props}
-    >
-      {children}
-    </h3>
-  );
-};
+    />
+  )
+);
+CardTitle.displayName = "CardTitle";
 
 type CardDescriptionProps = {
   className?: string;
   children?: React.ReactNode;
 };
 
-export const CardDescription = ({
-  className,
-  children,
-  ...props
-}: CardDescriptionProps) => {
-  return (
-    <p
-      className={cn("text-sm text-muted-foreground opacity-80", className)}
-      {...props}
-    >
-      {children}
-    </p>
-  );
-};
+const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  CardDescriptionProps
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+));
+CardDescription.displayName = "CardDescription";
 
 type CardContentProps = {
   className?: string;
   children?: React.ReactNode;
 };
 
-export const CardContent = ({
-  className,
-  children,
-  ...props
-}: CardContentProps) => {
-  return (
-    <div className={cn("pt-0", className)} {...props}>
-      {children}
-    </div>
-  );
-};
+const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  )
+);
+CardContent.displayName = "CardContent";
 
 type CardFooterProps = {
   className?: string;
   children?: React.ReactNode;
 };
 
-export const CardFooter = ({
-  className,
-  children,
-  ...props
-}: CardFooterProps) => {
-  return (
+const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       className={cn(
-        "flex items-center pt-4 border-t border-border/20",
+        "flex items-center justify-between p-6 pt-0",
+        "border-t border-white/10",
+        "bg-gradient-to-r from-uni-primary/20 via-uni-accent/20 to-transparent",
+        "backdrop-blur-md",
+        "transition-all duration-300",
+        "hover:from-uni-primary/30 hover:via-uni-accent/30",
+        "relative",
+        "before:absolute before:inset-0 before:bg-gradient-to-r before:from-uni-primary/10 before:to-uni-accent/10 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100",
+        "after:absolute after:inset-0 after:bg-gradient-to-b after:from-transparent after:to-uni-primary/5 after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100",
+        "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
         className
       )}
       {...props}
-    >
-      {children}
-    </div>
-  );
+    />
+  )
+);
+CardFooter.displayName = "CardFooter";
+
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
 };

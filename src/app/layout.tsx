@@ -9,7 +9,7 @@ import AuthProvider from "@/components/auth/auth-provider";
 import FirebaseProvider from "@/components/firebase/firebase-provider";
 import { GradientBackground } from "@/components/ui/gradient-background";
 import { ClientBodyFix } from "@/components/client-body-fix";
-import Script from "next/script";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,9 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
-      <head>
-        <Script src="/firebase-config.js" strategy="beforeInteractive" />
-      </head>
+      <head>{/* Firebase config is loaded by FirebaseProvider */}</head>
       <body className={`${inter.className} h-full`} suppressHydrationWarning>
         <ClientBodyFix />
         <AuthProvider>
@@ -70,6 +68,7 @@ export default function RootLayout({
             </ThemeProvider>
           </FirebaseProvider>
         </AuthProvider>
+        <SonnerToaster />
       </body>
     </html>
   );

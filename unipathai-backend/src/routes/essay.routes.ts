@@ -7,6 +7,19 @@ import {
   generateEssayOutline,
 } from "../services/ai.service";
 
+// Import types from our definition file
+import "../types/express";
+
+/*
+ * Note: Previous TypeScript errors related to Express route handlers have been addressed
+ * by the custom type declaration file at ../types/express.d.ts which properly extends
+ * the Express Request interface to include the user property.
+ *
+ * TODO: Implement user linking for essays when user functionality is complete:
+ * - Update essay routes to filter by and link to the requesting user
+ * - Uncomment the user permission checks in each route
+ */
+
 const router = express.Router();
 
 // Get all essays for a user
@@ -18,8 +31,8 @@ router.get("/", authenticate, async (req, res) => {
 
     const essays = await prisma.essay.findMany({
       where: {
-        // In a real implementation, you would have a userId field in the Essay model
-        // This is a placeholder for demonstration
+        // TODO: Implement proper user filtering
+        // userId: req.user.id
       },
       orderBy: {
         updatedAt: "desc",
@@ -50,7 +63,10 @@ router.get("/:id", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Essay not found" });
     }
 
-    // In a real implementation, check if the essay belongs to the user
+    // TODO: Check if essay belongs to the user
+    // if (essay.userId !== req.user.id) {
+    //   return res.status(403).json({ message: "Unauthorized" });
+    // }
 
     res.status(200).json(essay);
   } catch (error) {
@@ -79,7 +95,8 @@ router.post("/", authenticate, async (req, res) => {
         title,
         content,
         aiAssisted: aiAssisted || false,
-        // In a real implementation, you would link the essay to the user
+        // TODO: Implement user linking
+        // userId: req.user.id
       },
     });
 
@@ -112,7 +129,10 @@ router.put("/:id", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Essay not found" });
     }
 
-    // In a real implementation, check if the essay belongs to the user
+    // TODO: Check if essay belongs to the user
+    // if (existingEssay.userId !== req.user.id) {
+    //   return res.status(403).json({ message: "Unauthorized" });
+    // }
 
     const updatedEssay = await prisma.essay.update({
       where: { id },
@@ -151,7 +171,10 @@ router.delete("/:id", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Essay not found" });
     }
 
-    // In a real implementation, check if the essay belongs to the user
+    // TODO: Check if essay belongs to the user
+    // if (existingEssay.userId !== req.user.id) {
+    //   return res.status(403).json({ message: "Unauthorized" });
+    // }
 
     await prisma.essay.delete({
       where: { id },
@@ -189,7 +212,10 @@ router.post("/:id/feedback", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Essay not found" });
     }
 
-    // In a real implementation, check if the essay belongs to the user
+    // TODO: Check if essay belongs to the user
+    // if (essay.userId !== req.user.id) {
+    //   return res.status(403).json({ message: "Unauthorized" });
+    // }
 
     // Generate feedback
     const feedback = await generateEssayFeedback(essay.content, prompt);
@@ -235,7 +261,10 @@ router.post(
         return res.status(404).json({ message: "Essay not found" });
       }
 
-      // In a real implementation, check if the essay belongs to the user
+      // TODO: Check if essay belongs to the user
+      // if (essay.userId !== req.user.id) {
+      //   return res.status(403).json({ message: "Unauthorized" });
+      // }
 
       // Generate improvements
       const improvements = await generateEssayImprovements(essay.content);
